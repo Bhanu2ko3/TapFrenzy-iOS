@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7484A3752FDC429C00F044A7 /* TapFrenzyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */; };
+		7484A3772FDC429C00F044A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3762FDC429C00F044A7 /* ContentView.swift */; };
+		7484A3792FDC429F00F044A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7484A3782FDC429F00F044A7 /* Assets.xcassets */; };
+		7484A37C2FDC429F00F044A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7484A37B2FDC429F00F044A7 /* Preview Assets.xcassets */; };
+		7484A3862FDC429F00F044A7 /* TapFrenzyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3852FDC429F00F044A7 /* TapFrenzyTests.swift */; };
+		7484A3902FDC429F00F044A7 /* TapFrenzyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A38F2FDC429F00F044A7 /* TapFrenzyUITests.swift */; };
+		7484A3922FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */; };
+		7484A39F2FDC432700F044A7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A39E2FDC432700F044A7 /* GameView.swift */; };
+		7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3A02FDC433F00F044A7 /* GameOverView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7484A3822FDC429F00F044A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7484A3692FDC429C00F044A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7484A3702FDC429C00F044A7;
+			remoteInfo = TapFrenzy;
+		};
+		7484A38C2FDC429F00F044A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7484A3692FDC429C00F044A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7484A3702FDC429C00F044A7;
+			remoteInfo = TapFrenzy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7484A3712FDC429C00F044A7 /* TapFrenzy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapFrenzy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyApp.swift; sourceTree = "<group>"; };
+		7484A3762FDC429C00F044A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7484A3782FDC429F00F044A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7484A37B2FDC429F00F044A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7484A3812FDC429F00F044A7 /* TapFrenzyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapFrenzyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7484A3852FDC429F00F044A7 /* TapFrenzyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyTests.swift; sourceTree = "<group>"; };
+		7484A38B2FDC429F00F044A7 /* TapFrenzyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapFrenzyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7484A38F2FDC429F00F044A7 /* TapFrenzyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyUITests.swift; sourceTree = "<group>"; };
+		7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7484A39E2FDC432700F044A7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		7484A3A02FDC433F00F044A7 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7484A36E2FDC429C00F044A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A37E2FDC429F00F044A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A3882FDC429F00F044A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7484A3682FDC429C00F044A7 = {
+			isa = PBXGroup;
+			children = (
+				7484A3732FDC429C00F044A7 /* TapFrenzy */,
+				7484A3842FDC429F00F044A7 /* TapFrenzyTests */,
+				7484A38E2FDC429F00F044A7 /* TapFrenzyUITests */,
+				7484A3722FDC429C00F044A7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7484A3722FDC429C00F044A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7484A3712FDC429C00F044A7 /* TapFrenzy.app */,
+				7484A3812FDC429F00F044A7 /* TapFrenzyTests.xctest */,
+				7484A38B2FDC429F00F044A7 /* TapFrenzyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7484A3732FDC429C00F044A7 /* TapFrenzy */ = {
+			isa = PBXGroup;
+			children = (
+				7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */,
+				7484A3762FDC429C00F044A7 /* ContentView.swift */,
+				7484A3782FDC429F00F044A7 /* Assets.xcassets */,
+				7484A37A2FDC429F00F044A7 /* Preview Content */,
+				7484A39E2FDC432700F044A7 /* GameView.swift */,
+				7484A3A02FDC433F00F044A7 /* GameOverView.swift */,
+			);
+			path = TapFrenzy;
+			sourceTree = "<group>";
+		};
+		7484A37A2FDC429F00F044A7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7484A37B2FDC429F00F044A7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7484A3842FDC429F00F044A7 /* TapFrenzyTests */ = {
+			isa = PBXGroup;
+			children = (
+				7484A3852FDC429F00F044A7 /* TapFrenzyTests.swift */,
+			);
+			path = TapFrenzyTests;
+			sourceTree = "<group>";
+		};
+		7484A38E2FDC429F00F044A7 /* TapFrenzyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7484A38F2FDC429F00F044A7 /* TapFrenzyUITests.swift */,
+				7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */,
+			);
+			path = TapFrenzyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7484A3702FDC429C00F044A7 /* TapFrenzy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7484A3952FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzy" */;
+			buildPhases = (
+				7484A36D2FDC429C00F044A7 /* Sources */,
+				7484A36E2FDC429C00F044A7 /* Frameworks */,
+				7484A36F2FDC429C00F044A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TapFrenzy;
+			productName = TapFrenzy;
+			productReference = 7484A3712FDC429C00F044A7 /* TapFrenzy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7484A3802FDC429F00F044A7 /* TapFrenzyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7484A3982FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzyTests" */;
+			buildPhases = (
+				7484A37D2FDC429F00F044A7 /* Sources */,
+				7484A37E2FDC429F00F044A7 /* Frameworks */,
+				7484A37F2FDC429F00F044A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7484A3832FDC429F00F044A7 /* PBXTargetDependency */,
+			);
+			name = TapFrenzyTests;
+			productName = TapFrenzyTests;
+			productReference = 7484A3812FDC429F00F044A7 /* TapFrenzyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7484A38A2FDC429F00F044A7 /* TapFrenzyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7484A39B2FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzyUITests" */;
+			buildPhases = (
+				7484A3872FDC429F00F044A7 /* Sources */,
+				7484A3882FDC429F00F044A7 /* Frameworks */,
+				7484A3892FDC429F00F044A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7484A38D2FDC429F00F044A7 /* PBXTargetDependency */,
+			);
+			name = TapFrenzyUITests;
+			productName = TapFrenzyUITests;
+			productReference = 7484A38B2FDC429F00F044A7 /* TapFrenzyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7484A3692FDC429C00F044A7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					7484A3702FDC429C00F044A7 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					7484A3802FDC429F00F044A7 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 7484A3702FDC429C00F044A7;
+					};
+					7484A38A2FDC429F00F044A7 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 7484A3702FDC429C00F044A7;
+					};
+				};
+			};
+			buildConfigurationList = 7484A36C2FDC429C00F044A7 /* Build configuration list for PBXProject "TapFrenzy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7484A3682FDC429C00F044A7;
+			productRefGroup = 7484A3722FDC429C00F044A7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7484A3702FDC429C00F044A7 /* TapFrenzy */,
+				7484A3802FDC429F00F044A7 /* TapFrenzyTests */,
+				7484A38A2FDC429F00F044A7 /* TapFrenzyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7484A36F2FDC429C00F044A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7484A37C2FDC429F00F044A7 /* Preview Assets.xcassets in Resources */,
+				7484A3792FDC429F00F044A7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A37F2FDC429F00F044A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A3892FDC429F00F044A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7484A36D2FDC429C00F044A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7484A3772FDC429C00F044A7 /* ContentView.swift in Sources */,
+				7484A39F2FDC432700F044A7 /* GameView.swift in Sources */,
+				7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */,
+				7484A3752FDC429C00F044A7 /* TapFrenzyApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A37D2FDC429F00F044A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7484A3862FDC429F00F044A7 /* TapFrenzyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7484A3872FDC429F00F044A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7484A3922FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift in Sources */,
+				7484A3902FDC429F00F044A7 /* TapFrenzyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7484A3832FDC429F00F044A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7484A3702FDC429C00F044A7 /* TapFrenzy */;
+			targetProxy = 7484A3822FDC429F00F044A7 /* PBXContainerItemProxy */;
+		};
+		7484A38D2FDC429F00F044A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7484A3702FDC429C00F044A7 /* TapFrenzy */;
+			targetProxy = 7484A38C2FDC429F00F044A7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7484A3932FDC429F00F044A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7484A3942FDC429F00F044A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7484A3962FDC429F00F044A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TapFrenzy/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7484A3972FDC429F00F044A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TapFrenzy/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7484A3992FDC429F00F044A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TapFrenzy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TapFrenzy";
+			};
+			name = Debug;
+		};
+		7484A39A2FDC429F00F044A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TapFrenzy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TapFrenzy";
+			};
+			name = Release;
+		};
+		7484A39C2FDC429F00F044A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TapFrenzy;
+			};
+			name = Debug;
+		};
+		7484A39D2FDC429F00F044A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TapFrenzy.TapFrenzyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TapFrenzy;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7484A36C2FDC429C00F044A7 /* Build configuration list for PBXProject "TapFrenzy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7484A3932FDC429F00F044A7 /* Debug */,
+				7484A3942FDC429F00F044A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7484A3952FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7484A3962FDC429F00F044A7 /* Debug */,
+				7484A3972FDC429F00F044A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7484A3982FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7484A3992FDC429F00F044A7 /* Debug */,
+				7484A39A2FDC429F00F044A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7484A39B2FDC429F00F044A7 /* Build configuration list for PBXNativeTarget "TapFrenzyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7484A39C2FDC429F00F044A7 /* Debug */,
+				7484A39D2FDC429F00F044A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7484A3692FDC429C00F044A7 /* Project object */;
+}
