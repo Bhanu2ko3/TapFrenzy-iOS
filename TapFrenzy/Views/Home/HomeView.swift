@@ -27,7 +27,7 @@ struct HomeView: View {
                 
                 // Navigation Link Options Area
                 VStack(spacing: 20) {
-                    // MODE 1: Tap Frenzy
+                    // MODE 1: Tap Frenzy (Week 1 Reused)
                     NavigationLink(destination: ContentView()) {
                         HStack {
                             Image(systemName: "bolt.fill")
@@ -51,8 +51,8 @@ struct HomeView: View {
                         .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
                     }
                     
-                    // MODE 2: Light It Up
-                    NavigationLink(destination: Text("Light It Up Game Mode Coming Soon! ⏱️")) {
+                    // MODE 2: Light It Up (Week 2 New Dynamic Grid Mode)
+                    NavigationLink(destination: LightItUpGameView()) { // Linked seamlessly here
                         HStack {
                             Image(systemName: "square.grid.3x3.topleft.filled")
                                 .font(.title2)

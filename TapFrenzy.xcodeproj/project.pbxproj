@@ -17,6 +17,8 @@
 		7484A39F2FDC432700F044A7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A39E2FDC432700F044A7 /* GameView.swift */; };
 		7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3A02FDC433F00F044A7 /* GameOverView.swift */; };
 		749D8ED92FEEB6FB00953B38 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8ED82FEEB6FB00953B38 /* HomeView.swift */; };
+		749D8EDC2FEEBCAF00953B38 /* LightItUpGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */; };
+		749D8EDE2FEEBCDE00953B38 /* LightItUpGameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		7484A39E2FDC432700F044A7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		7484A3A02FDC433F00F044A7 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		749D8ED82FEEB6FB00953B38 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightItUpGameView.swift; sourceTree = "<group>"; };
+		749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightItUpGameOverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		749D8ED52FEEB54900953B38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				749D8EDA2FEEBC6200953B38 /* LightItUpMode */,
 				749D8ED72FEEB63E00953B38 /* TapFrenzyMode */,
 				749D8ED62FEEB59B00953B38 /* Home */,
 			);
@@ -158,6 +163,15 @@
 				7484A3A02FDC433F00F044A7 /* GameOverView.swift */,
 			);
 			path = TapFrenzyMode;
+			sourceTree = "<group>";
+		};
+		749D8EDA2FEEBC6200953B38 /* LightItUpMode */ = {
+			isa = PBXGroup;
+			children = (
+				749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */,
+				749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */,
+			);
+			path = LightItUpMode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +309,8 @@
 				7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */,
 				749D8ED92FEEB6FB00953B38 /* HomeView.swift in Sources */,
 				7484A3752FDC429C00F044A7 /* TapFrenzyApp.swift in Sources */,
+				749D8EDE2FEEBCDE00953B38 /* LightItUpGameOverView.swift in Sources */,
+				749D8EDC2FEEBCAF00953B38 /* LightItUpGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
