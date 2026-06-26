@@ -2,7 +2,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    // @AppStorage properties will be linked here in Step 2
+    // MARK: - Persisted High Scores per Mode
+    @AppStorage("highScore_tapFrenzy") private var tapFrenzyHighScore = 0
+    @AppStorage("highScore_lightItUp") private var lightItUpHighScore = 0
     
     var body: some View {
         NavigationStack {
@@ -19,13 +21,13 @@ struct HomeView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                 }
-                .padding(.top, 50)
+                .padding(.top, 40)
                 
                 Spacer()
                 
                 // Navigation Link Options Area
                 VStack(spacing: 20) {
-                    // MODE 1: Tap Frenzy (Week 1 Reused)
+                    // MODE 1: Tap Frenzy
                     NavigationLink(destination: ContentView()) {
                         HStack {
                             Image(systemName: "bolt.fill")
@@ -34,9 +36,9 @@ struct HomeView: View {
                                 Text("Tap Frenzy")
                                     .font(.title3)
                                     .fontWeight(.bold)
-                                Text("Tap as fast as you can in 10s!")
+                                Text("High Score: \(tapFrenzyHighScore)") // Displays persisted score
                                     .font(.caption)
-                                    .opacity(0.8)
+                                    .opacity(0.9)
                             }
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -49,7 +51,7 @@ struct HomeView: View {
                         .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
                     }
                     
-                    // MODE 2: Light It Up (Week 2 New Mode Shell)
+                    // MODE 2: Light It Up
                     NavigationLink(destination: Text("Light It Up Game Mode Coming Soon! ⏱️")) {
                         HStack {
                             Image(systemName: "square.grid.3x3.topleft.filled")
@@ -58,9 +60,9 @@ struct HomeView: View {
                                 Text("Light It Up")
                                     .font(.title3)
                                     .fontWeight(.bold)
-                                Text("Whack-a-Mole grid challenge!")
+                                Text("High Score: \(lightItUpHighScore)") // Displays persisted score
                                     .font(.caption)
-                                    .opacity(0.8)
+                                    .opacity(0.9)
                             }
                             Spacer()
                             Image(systemName: "chevron.right")

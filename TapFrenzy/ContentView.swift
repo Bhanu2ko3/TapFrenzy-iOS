@@ -7,7 +7,9 @@ struct ContentView: View {
     @State private var timeRemaining = 10
     @State private var isGameActive = true
     @State private var hasGameStarted = false // Challenge Architecture: Track if start button was clicked
-    @State private var highScore = 0
+    
+    // PERSISTENCE CHALLENGE: Replaced @State with @AppStorage to persist score across app restarts
+    @AppStorage("highScore_tapFrenzy") private var highScore = 0
     
     // MARK: - Challenge 2 Properties: Color Changer States
     @State private var buttonColor = Color.blue
@@ -82,7 +84,7 @@ struct ContentView: View {
                     timeRemaining: $timeRemaining,
                     isGameActive: $isGameActive,
                     hasGameStarted: $hasGameStarted,
-                    highScore: $highScore
+                    highScore: $highScore // Linked smoothly to @AppStorage
                 )
             }
         }
@@ -116,7 +118,7 @@ struct ContentView: View {
                 // Finalize state limits once ticks reach absolute zero bounds
                 isGameActive = false
                 if score > highScore {
-                    highScore = score
+                    highScore = score // Automatically saves directly to device storage!
                 }
             }
         }
