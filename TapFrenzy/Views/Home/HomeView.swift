@@ -5,6 +5,7 @@ struct HomeView: View {
     @AppStorage("currentPlayerName") private var playerName: String = ""
     @AppStorage("highScore_tapFrenzy") private var tapFrenzyHighScore = 0
     @AppStorage("highScore_lightItUp") private var lightItUpHighScore = 0
+    @AppStorage("appTheme") private var appTheme: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -21,6 +22,23 @@ struct HomeView: View {
                             .fontWeight(.bold)
                     }
                     Spacer()
+                    
+                    // Theme Picker Menu
+                    Menu {
+                        Picker("Theme", selection: $appTheme) {
+                            Text("System Default").tag(0)
+                            Text("Light Mode").tag(1)
+                            Text("Dark Mode").tag(2)
+                        }
+                    } label: {
+                        Image(systemName: "circle.lefthalf.filled")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                            .padding(8)
+                            .background(Color(.systemGray6))
+                            .clipShape(Circle())
+                    }
+                    
                     Button(action: {
                         withAnimation {
                             playerName = ""

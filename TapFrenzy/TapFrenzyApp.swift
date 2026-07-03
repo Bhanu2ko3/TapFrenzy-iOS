@@ -10,14 +10,26 @@ import SwiftUI
 @main
 struct TapFrenzyApp: App {
     @AppStorage("currentPlayerName") private var playerName: String = ""
+    @AppStorage("appTheme") private var appTheme: Int = 0
+
+    var preferredColorScheme: ColorScheme? {
+        switch appTheme {
+        case 1: return .light
+        case 2: return .dark
+        default: return nil // System default
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
-            if playerName.isEmpty {
-                WelcomeView()
-            } else {
-                HomeView()
+            Group {
+                if playerName.isEmpty {
+                    WelcomeView()
+                } else {
+                    HomeView()
+                }
             }
+            .preferredColorScheme(preferredColorScheme)
         }
     }
 }

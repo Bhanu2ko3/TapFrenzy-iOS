@@ -136,6 +136,16 @@ struct ContentView: View {
                 )
             } else {
                 // 3. Extracted Subview Component for End Results Summary View
+                GameOverView(
+                    score: $score,
+                    timeRemaining: $timeRemaining,
+                    isGameActive: $isGameActive,
+                    hasGameStarted: $hasGameStarted,
+                    highScore: $highScore,
+                    onHome: {
+                        dismiss()
+                    }
+                )
             }
         }
         .padding()
@@ -159,18 +169,6 @@ struct ContentView: View {
                     .cornerRadius(20)
                 }
             }
-        }
-        .fullScreenCover(isPresented: $showGameOver) {
-            GameOverView(
-                score: $score,
-                timeRemaining: $timeRemaining,
-                isGameActive: $isGameActive,
-                hasGameStarted: $hasGameStarted,
-                highScore: $highScore,
-                onHome: {
-                    dismiss()
-                }
-            )
         }
         // MARK: - Core Timer Publisher Engine Listener
         .onReceive(timer) { _ in
