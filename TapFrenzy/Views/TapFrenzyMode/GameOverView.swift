@@ -6,6 +6,7 @@ struct GameOverView: View {
     @Binding var isGameActive: Bool
     @Binding var hasGameStarted: Bool // Binding to control transition back to home screen
     @Binding var highScore: Int
+    var onHome: () -> Void // Added for Return Home functionality
     
     var body: some View {
         VStack(spacing: 25) {
@@ -55,27 +56,47 @@ struct GameOverView: View {
             Spacer()
             
             // Control Action Section: Return to Start Menu Option
-            Button(action: {
-                // Reset states and take user back to the Start Menu
-                withAnimation {
-                    score = 0
-                    timeRemaining = 10
-                    isGameActive = true
-                    hasGameStarted = false
+            VStack(spacing: 15) {
+                Button(action: {
+                    // Reset states and take user back to the Start Menu
+                    withAnimation {
+                        score = 0
+                        timeRemaining = 10
+                        isGameActive = true
+                        hasGameStarted = false
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Play Again")
+                    }
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(15)
+                    .shadow(radius: 5)
                 }
-            }) {
-                HStack {
-                    Image(systemName: "arrow.clockwise")
-                    Text("Play Again")
+                
+                Button(action: {
+                    withAnimation {
+                        onHome()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "house.fill")
+                        Text("Return Home")
+                    }
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(15)
                 }
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(15)
-                .shadow(radius: 5)
             }
             .padding(.horizontal, 40)
             .padding(.bottom, 60)

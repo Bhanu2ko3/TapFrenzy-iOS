@@ -59,11 +59,14 @@ struct QuizRushGameView: View {
             // Load game immediately when view appears
             await viewModel.loadGame()
         }
+        .onDisappear {
+            viewModel.stopTimer()
+        }
     }
     
     // Extracted view for the loaded state to keep body clean
     private var loadedView: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 25) {
             // Header: Progress and Streak
             HStack {
                 Text("Question \(viewModel.currentIndex + 1) of 10")
@@ -79,29 +82,56 @@ struct QuizRushGameView: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.top, 20)
+            .padding(.top, 10)
             
             // Score Display
             Text("Score: \(viewModel.score)")
                 .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.blue)
+                .fontWeight(.black)
+                .foregroundColor(.indigo)
+            
+            // Timer Bar
+            VStack(spacing: 5) {
+                ProgressView(value: Double(viewModel.timeRemaining), total: 15.0)
+                    .progressViewStyle(LinearProgressViewStyle(tint: timerColor()))
+                    .scaleEffect(x: 1, y: 1.5, anchor: .center)
+                    .animation(.linear(duration: 1.0), value: viewModel.timeRemaining)
+                
+                HStack {
+                    Image(systemName: "timer")
+                        .foregroundColor(timerColor())
+                    Text("\(viewModel.timeRemaining)s")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .foregroundColor(timerColor())
+                }
+            }
+            .padding(.horizontal, 20)
             
             Spacer()
             
-            // Question Display
+            // Question Display with clean UI
             let currentQuestion = viewModel.questions[viewModel.currentIndex]
             
-            Text(currentQuestion.decodedQuestion)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding()
-                .frame(maxWidth: .infinity, minHeight: 120)
-                .background(Color(.systemGray6))
-                .cornerRadius(15)
-                .padding(.horizontal)
-                .animation(.easeInOut, value: viewModel.currentIndex)
+            VStack(spacing: 15) {
+                Image(systemName: "quote.opening")
+                    .font(.largeTitle)
+                    .foregroundColor(.indigo.opacity(0.5))
+                
+                Text(currentQuestion.decodedQuestion)
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.primary)
+                    .animation(.easeInOut, value: viewModel.currentIndex)
+            }
+            .padding(25)
+            .frame(maxWidth: .infinity, minHeight: 180)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color(.systemGray6), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom)
+            )
+            .cornerRadius(20)
+            .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+            .padding(.horizontal, 20)
             
             Spacer()
             
@@ -112,25 +142,35 @@ struct QuizRushGameView: View {
                         viewModel.submitAnswer(answer)
                     }) {
                         Text(answer)
-                            .font(.headline)
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
                             .foregroundColor(buttonTextColor(for: answer))
                             .padding()
-                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .frame(maxWidth: .infinity, minHeight: 55)
                             .background(buttonBackgroundColor(for: answer))
-                            .cornerRadius(12)
-                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                            .cornerRadius(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(buttonBorderColor(for: answer), lineWidth: 2)
+                            )
+                            .shadow(color: buttonBorderColor(for: answer).opacity(0.3), radius: 4, x: 0, y: 2)
                     }
                     .disabled(viewModel.isAnswerLocked)
                     // Apply a shake offset if this was the selected wrong answer
                     .offset(x: (viewModel.selectedAnswer == answer && viewModel.isAnswerCorrect == false) ? shakeOffset() : 0)
                 }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             .padding(.bottom, 30)
         }
     }
     
     // MARK: - Styling Helpers
+    
+    private func timerColor() -> Color {
+        if viewModel.timeRemaining > 8 { return .green }
+        if viewModel.timeRemaining > 4 { return .orange }
+        return .red
+    }
     
     private func buttonBackgroundColor(for answer: String) -> Color {
         if viewModel.selectedAnswer == answer {
@@ -140,9 +180,8 @@ struct QuizRushGameView: View {
                 return Color.red
             }
         }
-        // If an answer is locked, visually highlight the correct answer in green even if they didn't pick it
         if viewModel.isAnswerLocked && answer == viewModel.questions[viewModel.currentIndex].decodedCorrectAnswer {
-            return Color.green.opacity(0.6)
+            return Color.green.opacity(0.8)
         }
         return Color(.systemBackground)
     }
@@ -154,11 +193,18 @@ struct QuizRushGameView: View {
         return .primary
     }
     
-    // A simple hack to trigger a shake using SwiftUI offset combined with an implicit animation block inside the ViewModel delay.
-    // However, to make it truly shake, we'd need a more complex GeometryEffect. 
-    // For simplicity, we just use a small offset transition.
+    private func buttonBorderColor(for answer: String) -> Color {
+        if viewModel.selectedAnswer == answer {
+            if viewModel.isAnswerCorrect == true { return .green }
+            if viewModel.isAnswerCorrect == false { return .red }
+        }
+        if viewModel.isAnswerLocked && answer == viewModel.questions[viewModel.currentIndex].decodedCorrectAnswer {
+            return .green
+        }
+        return Color.indigo.opacity(0.3)
+    }
+    
     private func shakeOffset() -> CGFloat {
-        // We will just return 10 for a slight shift as a basic visual cue
-        return 10
+        return 8
     }
 }

@@ -7,6 +7,7 @@ struct LightItUpGameOverView: View {
     @Binding var showGameOver: Bool
     
     var onReset: () -> Void // Callback block function execution handler routine
+    var onHome: () -> Void // Added for Return Home functionality
     
     @AppStorage("highScore_lightItUp") private var highScore = 0
     
@@ -55,30 +56,50 @@ struct LightItUpGameOverView: View {
             
             Spacer()
             
-            Button(action: {
-                // Reset parent tracking elements to initial configurations bounds
-                withAnimation {
-                    timeElapsed = 0
-                    isGameActive = true
-                    showGameOver = false
-                    onReset() // Trigger parent refresh closure blocks
+            VStack(spacing: 15) {
+                Button(action: {
+                    // Reset parent tracking elements to initial configurations bounds
+                    withAnimation {
+                        timeElapsed = 0
+                        isGameActive = true
+                        showGameOver = false
+                        onReset() // Trigger parent refresh closure blocks
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Play Again")
+                    }
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.purple)
+                    .cornerRadius(15)
+                    .shadow(radius: 5)
                 }
-            }) {
-                HStack {
-                    Image(systemName: "arrow.clockwise")
-                    Text("Play Again")
+                
+                Button(action: {
+                    withAnimation {
+                        onHome()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "house.fill")
+                        Text("Return Home")
+                    }
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.purple)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.purple.opacity(0.1))
+                    .cornerRadius(15)
                 }
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.purple)
-                .cornerRadius(15)
-                .shadow(radius: 5)
             }
             .padding(.horizontal, 40)
-            .padding(.bottom, 80)
+            .padding(.bottom, 60)
         }
         .padding()
     }

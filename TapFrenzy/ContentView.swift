@@ -11,6 +11,9 @@ struct ContentView: View {
     @State private var timeRemaining = 10
     @State private var isGameActive = true
     @State private var hasGameStarted = false
+    @State private var showGameOver = false
+    
+    @Environment(\.dismiss) var dismiss // Added for returning home
     
     // MARK: - Challenge 2 Properties: Color Changer States
     @State private var buttonColor = Color.blue

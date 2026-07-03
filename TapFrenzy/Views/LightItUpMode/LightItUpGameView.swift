@@ -51,6 +51,8 @@ struct LightItUpGameView: View {
     @State private var currentLevel: GameLevel = .L1
     @State private var showGameOver = false
     
+    @Environment(\.dismiss) var dismiss // Added for returning home
+    
     @State private var gameTimer = Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()
     let secondsTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -230,6 +232,9 @@ struct LightItUpGameView: View {
                     score = 0
                     setupLevel(level: .L1)
                 }
+            }, onHome: {
+                showGameOver = false
+                dismiss()
             })
         }
         .onReceive(gameTimer) { _ in
