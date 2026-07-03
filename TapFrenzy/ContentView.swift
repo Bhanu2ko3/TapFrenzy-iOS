@@ -136,19 +136,42 @@ struct ContentView: View {
                 )
             } else {
                 // 3. Extracted Subview Component for End Results Summary View
-                GameOverView(
-                    score: $score,
-                    timeRemaining: $timeRemaining,
-                    isGameActive: $isGameActive,
-                    hasGameStarted: $hasGameStarted,
-                    highScore: $highScore,
-                    onHome: {
-                        dismiss()
-                    }
-                )
             }
         }
         .padding()
+        .navigationTitle("Tap Frenzy")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .font(.title3)
+                        Text("Home")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.blue)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.blue.opacity(0.15))
+                    .cornerRadius(20)
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $showGameOver) {
+            GameOverView(
+                score: $score,
+                timeRemaining: $timeRemaining,
+                isGameActive: $isGameActive,
+                hasGameStarted: $hasGameStarted,
+                highScore: $highScore,
+                onHome: {
+                    dismiss()
+                }
+            )
+        }
         // MARK: - Core Timer Publisher Engine Listener
         .onReceive(timer) { _ in
             // Only execute countdown loops if the active gameplay sequence has initiated

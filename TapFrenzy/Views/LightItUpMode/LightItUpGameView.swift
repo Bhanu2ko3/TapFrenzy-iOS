@@ -225,6 +225,25 @@ struct LightItUpGameView: View {
         .padding()
         .navigationTitle("Light It Up")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .font(.title3)
+                        Text("Home")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.purple)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.purple.opacity(0.15))
+                    .cornerRadius(20)
+                }
+            }
+        }
         .fullScreenCover(isPresented: $showGameOver) {
             LightItUpGameOverView(score: score, isGameActive: $isGameActive, timeElapsed: $timeElapsed, showGameOver: $showGameOver, onReset: {
                 // Re-initialize all states on reset action trigger

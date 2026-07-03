@@ -4,63 +4,190 @@ struct QuizRushGameView: View {
     @StateObject private var viewModel = QuizViewModel()
     @Environment(\.dismiss) var dismiss
     
+    @State private var hasGameStarted = false
+    @AppStorage("game_history") private var historyJSON: String = "[]"
+    
+    // Computed Leaderboard: Unique highest score per player
+    var topPlayers: [RoundResult] {
+        let allResults = RoundResult.load(from: historyJSON)
+        let modeResults = allResults.filter { $0.gameMode == "Quiz Rush" }
+        
+        var highestScores: [String: RoundResult] = [:]
+        for result in modeResults {
+            if let existing = highestScores[result.playerName] {
+                if result.score > existing.score {
+                    highestScores[result.playerName] = result
+                }
+            } else {
+                highestScores[result.playerName] = result
+            }
+        }
+        
+        return Array(highestScores.values.sorted(by: { $0.score > $1.score }).prefix(3))
+    }
+    
     var body: some View {
         VStack {
-            switch viewModel.viewState {
-            case .loading:
-                VStack(spacing: 20) {
-                    ProgressView()
-                        .scaleEffect(2)
-                    Text("Fetching Live Questions...")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                }
-                
-            case .failed:
-                VStack(spacing: 20) {
-                    Image(systemName: "wifi.exclamationmark")
-                        .font(.system(size: 60))
-                        .foregroundColor(.red)
-                    Text("Connection Failed")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Could not fetch questions from the server.")
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                    
-                    Button(action: {
-                        Task { await viewModel.loadGame() }
-                    }) {
-                        Text("Retry")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: 200)
-                            .background(Color.blue)
-                            .cornerRadius(10)
+            if !hasGameStarted {
+                startScreen
+            } else {
+                switch viewModel.viewState {
+                case .loading:
+                    VStack(spacing: 20) {
+                        ProgressView()
+                            .scaleEffect(2)
+                        Text("Fetching Live Questions...")
+                            .font(.headline)
+                            .foregroundColor(.gray)
                     }
-                    .padding(.top, 10)
-                }
-                
-            case .loaded:
-                loadedView
-                
-            case .completed:
-                QuizGameOverView(score: viewModel.score, streak: viewModel.longestStreak) {
-                    Task { await viewModel.loadGame() }
-                } onHome: {
-                    dismiss()
+                    
+                case .failed:
+                    VStack(spacing: 20) {
+                        Image(systemName: "wifi.exclamationmark")
+                            .font(.system(size: 60))
+                            .foregroundColor(.red)
+                        Text("Connection Failed")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text("Could not fetch questions from the server.")
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                        
+                        Button(action: {
+                            Task { await viewModel.loadGame() }
+                        }) {
+                            Text("Retry")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: 200)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
+                        .padding(.top, 10)
+                    }
+                    
+                case .loaded:
+                    loadedView
+                    
+                case .completed:
+                    QuizGameOverView(score: viewModel.score, streak: viewModel.longestStreak) {
+                        withAnimation {
+                            hasGameStarted = false
+                        }
+                    } onHome: {
+                        dismiss()
+                    }
                 }
             }
         }
         .navigationTitle("Quiz Rush")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            // Load game immediately when view appears
-            await viewModel.loadGame()
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .font(.title3)
+                        Text("Home")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.indigo)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.indigo.opacity(0.15))
+                    .cornerRadius(20)
+                }
+            }
         }
         .onDisappear {
             viewModel.stopTimer()
+        }
+    }
+    
+    // MARK: - Start Screen Component
+    private var startScreen: some View {
+        VStack(spacing: 30) {
+            VStack(spacing: 15) {
+                Image(systemName: "brain.head.profile")
+                    .font(.system(size: 60))
+                    .foregroundColor(.indigo)
+                Text("Quiz Rush")
+                    .font(.system(size: 40, weight: .black, design: .rounded))
+                    .foregroundColor(.indigo)
+            }
+            .padding(.top, 40)
+            
+            Text("Test your general knowledge! Answer 10 trivia questions. Faster answers keep your streak alive!")
+                .font(.body)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 30)
+            
+            Spacer()
+            
+            // Leaderboard Section
+            VStack(spacing: 10) {
+                HStack {
+                    Image(systemName: "list.star")
+                        .foregroundColor(.yellow)
+                    Text("Top Players")
+                        .font(.headline)
+                }
+                
+                if topPlayers.isEmpty {
+                    Text("No scores yet. Be the first!")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                } else {
+                    ForEach(Array(topPlayers.enumerated()), id: \.element.id) { index, result in
+                        HStack {
+                            Text("\(index + 1).")
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
+                            Text(result.playerName)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(result.score)")
+                                .fontWeight(.bold)
+                                .foregroundColor(.indigo)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                    }
+                }
+            }
+            .padding(.horizontal, 30)
+            
+            Spacer()
+            
+            Button(action: {
+                withAnimation {
+                    hasGameStarted = true
+                }
+                Task {
+                    await viewModel.loadGame()
+                }
+            }) {
+                HStack {
+                    Image(systemName: "play.fill")
+                    Text("START GAME")
+                }
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.indigo)
+                .cornerRadius(15)
+                .shadow(radius: 5)
+            }
+            .padding(.horizontal, 40)
+            .padding(.bottom, 60)
         }
     }
     
@@ -122,6 +249,8 @@ struct QuizRushGameView: View {
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.primary)
+                    .lineLimit(8)
+                    .minimumScaleFactor(0.6)
                     .animation(.easeInOut, value: viewModel.currentIndex)
             }
             .padding(25)
