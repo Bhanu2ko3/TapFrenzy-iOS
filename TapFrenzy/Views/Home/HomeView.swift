@@ -7,6 +7,8 @@ struct HomeView: View {
     @AppStorage("highScore_lightItUp") private var lightItUpHighScore = 0
     @AppStorage("appTheme") private var appTheme: Int = 0
     
+    @State private var showProfile = false
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 35) {
@@ -39,20 +41,15 @@ struct HomeView: View {
                             .clipShape(Circle())
                     }
                     
+                    // Profile Button
                     Button(action: {
-                        withAnimation {
-                            playerName = ""
-                        }
+                        showProfile = true
                     }) {
-                        Text("Change")
-                            .font(.caption)
-                            .fontWeight(.bold)
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.system(size: 34))
                             .foregroundColor(.blue)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Color.blue.opacity(0.1))
-                            .cornerRadius(15)
                     }
+                    .padding(.leading, 5)
                 }
                 .padding(.top, 10)
                 
@@ -171,6 +168,9 @@ struct HomeView: View {
                 Spacer()
             }
             .padding()
+            .sheet(isPresented: $showProfile) {
+                ProfileView()
+            }
         }
     }
 }
@@ -178,6 +178,121 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+// MARK: - Profile View
+struct ProfileView: View {
+    @Environment(\.dismiss) var dismiss
+    @AppStorage("currentPlayerName") private var playerName: String = ""
+    @AppStorage("game_history") private var historyJSON: String = "[]"
+    
+    var history: [RoundResult] {
+        RoundResult.load(from: historyJSON)
+    }
+    
+    var totalGames: Int {
+        history.count
+    }
+    
+    var totalScore: Int {
+        history.reduce(0) { $0 + $1.score }
+    }
+    
+    var favoriteGame: String {
+        let modes = history.map { $0.gameMode }
+        let counts = modes.reduce(into: [:]) { counts, word in counts[word, default: 0] += 1 }
+        return counts.max(by: { $0.1 < $1.1 })?.key ?? "None"
+    }
+    
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 30) {
+                // Header
+                VStack(spacing: 15) {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.blue)
+                    
+                    Text(playerName)
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                }
+                .padding(.top, 40)
+                
+                // Stats Grid
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                    StatBox(title: "Total Games", value: "\(totalGames)", icon: "gamecontroller.fill", color: .indigo)
+                    StatBox(title: "Total Score", value: "\(totalScore)", icon: "star.fill", color: .yellow)
+                }
+                .padding(.horizontal, 30)
+                
+                LazyVGrid(columns: [GridItem(.flexible())], spacing: 20) {
+                    StatBox(title: "Top Mode", value: favoriteGame, icon: "trophy.fill", color: .orange)
+                }
+                .padding(.horizontal, 30)
+                
+                Spacer()
+                
+                // Sign Out Button
+                Button(action: {
+                    withAnimation {
+                        playerName = ""
+                        dismiss()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                        Text("Sign Out")
+                    }
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(15)
+                    .shadow(radius: 5)
+                }
+                .padding(.horizontal, 40)
+                .padding(.bottom, 40)
+            }
+            .navigationTitle("Player Profile")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct StatBox: View {
+    let title: String
+    let value: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            Image(systemName: icon)
+                .font(.title)
+                .foregroundColor(color)
+            Text(value)
+                .font(.title3)
+                .fontWeight(.bold)
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 20)
+        .background(Color(.systemGray6))
+        .cornerRadius(15)
     }
 }
 

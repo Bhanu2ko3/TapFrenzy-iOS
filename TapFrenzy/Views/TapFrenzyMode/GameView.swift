@@ -10,6 +10,10 @@ struct GameView: View {
     @Binding var isBonusActive: Bool
     @Binding var isPenaltyActive: Bool
     
+    // Random offsets for moving button
+    @State private var offsetX: CGFloat = 0
+    @State private var offsetY: CGFloat = 0
+    
     var body: some View {
         VStack(spacing: 30) {
             // Header Section: Title and Live Countdown Display
@@ -56,7 +60,7 @@ struct GameView: View {
             }
             
             // Interaction Section: Main Core Gameplay TAP Button Container
-            VStack {
+            ZStack {
                 Button(action: {
                     if isGameActive {
                         // Challenge 2 Action Logic
@@ -84,10 +88,24 @@ struct GameView: View {
                         .animation(.spring(response: 0.3, dampingFraction: 0.6), value: score)
                         .animation(.easeInOut, value: timeRemaining)
                 }
+                .offset(x: offsetX, y: offsetY)
+                .animation(.easeInOut(duration: 0.4), value: offsetX)
+                .animation(.easeInOut(duration: 0.4), value: offsetY)
             }
-            // Fixed height container to prevent layout shifting when the button shrinks
-            .frame(height: 220)
-            .padding(.bottom, 50)
+            // Larger container so the button has room to move without clipping
+            .frame(maxWidth: .infinity)
+            .frame(height: 250)
+            .padding(.bottom, 30)
+        }
+        .onChange(of: timeRemaining) { _ in
+            if isGameActive {
+                // Randomize position every second within safe bounds
+                offsetX = CGFloat.random(in: -100...100)
+                offsetY = CGFloat.random(in: -80...80)
+            } else {
+                offsetX = 0
+                offsetY = 0
+            }
         }
     }
 }
