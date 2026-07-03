@@ -58,11 +58,23 @@ struct LightItUpGameView: View {
         Array(repeating: GridItem(.flexible(), spacing: 15), count: 3)
     }
     
-    // Computed Leaderboard
+    // Computed Leaderboard: Unique highest score per player
     var topPlayers: [RoundResult] {
         let allResults = RoundResult.load(from: historyJSON)
         let modeResults = allResults.filter { $0.gameMode == "Light It Up" }
-        return Array(modeResults.sorted(by: { $0.score > $1.score }).prefix(3))
+        
+        var highestScores: [String: RoundResult] = [:]
+        for result in modeResults {
+            if let existing = highestScores[result.playerName] {
+                if result.score > existing.score {
+                    highestScores[result.playerName] = result
+                }
+            } else {
+                highestScores[result.playerName] = result
+            }
+        }
+        
+        return Array(highestScores.values.sorted(by: { $0.score > $1.score }).prefix(3))
     }
     
     var body: some View {

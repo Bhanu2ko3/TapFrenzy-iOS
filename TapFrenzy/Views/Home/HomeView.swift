@@ -106,6 +106,32 @@ struct HomeView: View {
                         .shadow(color: .purple.opacity(0.3), radius: 8, x: 0, y: 4)
                     }
                     
+                    // MODE 3: Quiz Rush
+                    @AppStorage("highScore_quizRush") var quizRushHighScore = 0
+                    
+                    NavigationLink(destination: QuizRushGameView()) {
+                        HStack {
+                            Image(systemName: "brain.head.profile")
+                                .font(.title2)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Quiz Rush")
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                Text("High Score: \(quizRushHighScore)")
+                                    .font(.caption)
+                                    .opacity(0.9)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.indigo)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
+                        .shadow(color: .indigo.opacity(0.3), radius: 8, x: 0, y: 4)
+                    }
+                    
                     // View History Button
                     NavigationLink(destination: HistoryView()) {
                         HStack {
