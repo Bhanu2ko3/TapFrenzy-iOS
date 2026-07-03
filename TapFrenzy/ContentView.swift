@@ -141,7 +141,10 @@ struct ContentView: View {
                     timeRemaining: $timeRemaining,
                     isGameActive: $isGameActive,
                     hasGameStarted: $hasGameStarted,
-                    highScore: $highScore
+                    highScore: $highScore,
+                    onHome: {
+                        dismiss()
+                    }
                 )
             }
         }
