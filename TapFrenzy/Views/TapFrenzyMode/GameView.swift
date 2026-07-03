@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct GameView: View {
@@ -15,7 +14,7 @@ struct GameView: View {
         VStack(spacing: 30) {
             // Header Section: Title and Live Countdown Display
             VStack(spacing: 10) {
-                Text("Tap Frenzy! 🎮")
+                Text("Tap Frenzy")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
@@ -41,12 +40,12 @@ struct GameView: View {
             
             // Challenge 2 Indicator Text Hints
             if isBonusActive {
-                Text("💥 BONUS ACTIVE! (+2 Points) 💥")
+                Text("BONUS ACTIVE! (+2 Points)")
                     .font(.caption)
                     .fontWeight(.bold)
                     .foregroundColor(.green)
             } else if isPenaltyActive {
-                Text("⚠️ PENALTY RISK! (-1 Point) ⚠️")
+                Text("PENALTY RISK! (-1 Point)")
                     .font(.caption)
                     .fontWeight(.bold)
                     .foregroundColor(.gray)
@@ -70,7 +69,7 @@ struct GameView: View {
                         }
                     }
                 }) {
-                    Text(isBonusActive ? "BONUS!" : (isPenaltyActive ? "CAREFUL!" : "TAP ME!"))
+                    Text(isBonusActive ? "BONUS" : (isPenaltyActive ? "CAREFUL" : "TAP"))
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -82,6 +81,7 @@ struct GameView: View {
                         .background(buttonColor)
                         .clipShape(Circle())
                         .shadow(radius: 10)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: score)
                         .animation(.easeInOut, value: timeRemaining)
                 }
             }

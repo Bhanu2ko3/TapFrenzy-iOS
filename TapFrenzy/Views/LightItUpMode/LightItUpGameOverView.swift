@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct LightItUpGameOverView: View {
@@ -13,11 +12,14 @@ struct LightItUpGameOverView: View {
     
     var body: some View {
         VStack(spacing: 25) {
-            Text("ROUND FINISHED 🏁")
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundColor(.purple)
-                .padding(.top, 60)
+            HStack {
+                Image(systemName: "flag.checkered")
+                Text("ROUND FINISHED")
+            }
+            .font(.largeTitle)
+            .fontWeight(.black)
+            .foregroundColor(.purple)
+            .padding(.top, 60)
             
             Spacer()
             
@@ -40,10 +42,14 @@ struct LightItUpGameOverView: View {
                 .padding(.top, 10)
                 
                 if score >= highScore && score > 0 {
-                    Text("🎉 New Grid Master Record! 🎉")
-                        .font(.headline)
-                        .foregroundColor(.purple)
-                        .padding(.top, 5)
+                    HStack {
+                        Image(systemName: "star.fill")
+                        Text("New Grid Master Record!")
+                        Image(systemName: "star.fill")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.purple)
+                    .padding(.top, 5)
                 }
             }
             
@@ -51,10 +57,12 @@ struct LightItUpGameOverView: View {
             
             Button(action: {
                 // Reset parent tracking elements to initial configurations bounds
-                timeElapsed = 0
-                isGameActive = true
-                showGameOver = false
-                onReset() // Trigger parent refresh closure blocks
+                withAnimation {
+                    timeElapsed = 0
+                    isGameActive = true
+                    showGameOver = false
+                    onReset() // Trigger parent refresh closure blocks
+                }
             }) {
                 HStack {
                     Image(systemName: "arrow.clockwise")

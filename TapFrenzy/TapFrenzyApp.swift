@@ -9,8 +9,15 @@ import SwiftUI
 
 @main
 struct TapFrenzyApp: App {
+    @AppStorage("currentPlayerName") private var playerName: String = ""
+
     var body: some Scene {
         WindowGroup {
-            HomeView()        }
+            if playerName.isEmpty {
+                WelcomeView()
+            } else {
+                HomeView()
+            }
+        }
     }
 }

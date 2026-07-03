@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct GameOverView: View {
@@ -10,11 +9,14 @@ struct GameOverView: View {
     
     var body: some View {
         VStack(spacing: 25) {
-            Text("GAME OVER 🏁")
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundColor(.red)
-                .padding(.top, 50)
+            HStack {
+                Image(systemName: "flag.checkered")
+                Text("GAME OVER")
+            }
+            .font(.largeTitle)
+            .fontWeight(.black)
+            .foregroundColor(.red)
+            .padding(.top, 50)
             
             Spacer()
             
@@ -39,10 +41,14 @@ struct GameOverView: View {
                 .padding(.top, 10)
                 
                 if score >= highScore && score > 0 {
-                    Text("🎉 New Personal Best! 🎉")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                        .padding(.top, 5)
+                    HStack {
+                        Image(systemName: "star.fill")
+                        Text("New Personal Best!")
+                        Image(systemName: "star.fill")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.green)
+                    .padding(.top, 5)
                 }
             }
             
@@ -51,10 +57,12 @@ struct GameOverView: View {
             // Control Action Section: Return to Start Menu Option
             Button(action: {
                 // Reset states and take user back to the Start Menu
-                score = 0
-                timeRemaining = 10
-                isGameActive = true
-                hasGameStarted = false
+                withAnimation {
+                    score = 0
+                    timeRemaining = 10
+                    isGameActive = true
+                    hasGameStarted = false
+                }
             }) {
                 HStack {
                     Image(systemName: "arrow.clockwise")

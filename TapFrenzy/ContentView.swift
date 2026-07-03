@@ -1,15 +1,16 @@
-
 import SwiftUI
 
 struct ContentView: View {
+    // MARK: - Persisted Data
+    @AppStorage("currentPlayerName") private var playerName: String = ""
+    @AppStorage("game_history") private var historyJSON: String = "[]"
+    @AppStorage("highScore_tapFrenzy") private var highScore = 0
+    
     // MARK: - Game State Properties
     @State private var score = 0
     @State private var timeRemaining = 10
     @State private var isGameActive = true
-    @State private var hasGameStarted = false // Challenge Architecture: Track if start button was clicked
-    
-    // PERSISTENCE CHALLENGE: Replaced @State with @AppStorage to persist score across app restarts
-    @AppStorage("highScore_tapFrenzy") private var highScore = 0
+    @State private var hasGameStarted = false
     
     // MARK: - Challenge 2 Properties: Color Changer States
     @State private var buttonColor = Color.blue
@@ -19,15 +20,27 @@ struct ContentView: View {
     // MARK: - Countdown Timer Publisher
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    // Computed Leaderboard
+    var topPlayers: [RoundResult] {
+        let allResults = RoundResult.load(from: historyJSON)
+        let modeResults = allResults.filter { $0.gameMode == "Tap Frenzy" }
+        return Array(modeResults.sorted(by: { $0.score > $1.score }).prefix(3))
+    }
+    
     var body: some View {
         VStack {
             if !hasGameStarted {
-                // 1. Initial Start Screen View Menu Component
-                VStack(spacing: 40) {
-                    Text("Tap Frenzy! 🎮")
-                        .font(.system(size: 40, weight: .black, design: .rounded))
-                        .foregroundColor(.blue)
-                        .padding(.top, 60)
+                // 1. Initial Start Screen
+                VStack(spacing: 30) {
+                    VStack(spacing: 15) {
+                        Image(systemName: "bolt.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(.blue)
+                        Text("Tap Frenzy")
+                            .font(.system(size: 40, weight: .black, design: .rounded))
+                            .foregroundColor(.primary)
+                    }
+                    .padding(.top, 40)
                     
                     Text("Test your speed! Tap the button as much as you can in 10 seconds. Watch out for penalty colors!")
                         .font(.body)
@@ -37,35 +50,64 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    // High Score Badge Tracker Display
-                    HStack {
-                        Image(systemName: "crown.fill")
-                            .foregroundColor(.yellow)
-                        Text("Current High Score: \(highScore)")
-                            .font(.headline)
+                    // Leaderboard Section
+                    VStack(spacing: 10) {
+                        HStack {
+                            Image(systemName: "list.star")
+                                .foregroundColor(.yellow)
+                            Text("Top Players")
+                                .font(.headline)
+                        }
+                        
+                        if topPlayers.isEmpty {
+                            Text("No scores yet. Be the first!")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        } else {
+                            ForEach(Array(topPlayers.enumerated()), id: \.element.id) { index, result in
+                                HStack {
+                                    Text("\(index + 1).")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                    Text(result.playerName)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Text("\(result.score)")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 8)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
+                            }
+                        }
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
+                    .padding(.horizontal, 30)
                     
                     Spacer()
                     
                     // Main Start Core Interface Trigger Button
                     Button(action: {
-                        hasGameStarted = true // Launch game and start timer loop
+                        withAnimation {
+                            hasGameStarted = true
+                        }
                     }) {
-                        Text("START GAME 🚀")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(15)
-                            .shadow(radius: 5)
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("START GAME")
+                        }
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(15)
+                        .shadow(radius: 5)
                     }
                     .padding(.horizontal, 40)
-                    .padding(.bottom, 80)
+                    .padding(.bottom, 60)
                 }
             } else if isGameActive {
                 // 2. Extracted Subview Component for Active Gameplay
@@ -84,7 +126,7 @@ struct ContentView: View {
                     timeRemaining: $timeRemaining,
                     isGameActive: $isGameActive,
                     hasGameStarted: $hasGameStarted,
-                    highScore: $highScore // Linked smoothly to @AppStorage
+                    highScore: $highScore
                 )
             }
         }
@@ -100,18 +142,20 @@ struct ContentView: View {
                 // Challenge 2 Processing: Update color values at modulo interval steps
                 if timeRemaining % 2 == 0 {
                     let randomState = Int.random(in: 1...3)
-                    if randomState == 1 {
-                        buttonColor = Color.green
-                        isBonusActive = true
-                        isPenaltyActive = false
-                    } else if randomState == 2 {
-                        buttonColor = Color.gray
-                        isBonusActive = false
-                        isPenaltyActive = true
-                    } else {
-                        buttonColor = Color.blue
-                        isBonusActive = false
-                        isPenaltyActive = false
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        if randomState == 1 {
+                            buttonColor = Color.green
+                            isBonusActive = true
+                            isPenaltyActive = false
+                        } else if randomState == 2 {
+                            buttonColor = Color.gray
+                            isBonusActive = false
+                            isPenaltyActive = true
+                        } else {
+                            buttonColor = Color.blue
+                            isBonusActive = false
+                            isPenaltyActive = false
+                        }
                     }
                 }
             } else {
@@ -120,6 +164,15 @@ struct ContentView: View {
                 if score > highScore {
                     highScore = score // Automatically saves directly to device storage!
                 }
+                
+                // Save to History
+                let result = RoundResult(playerName: playerName.isEmpty ? "Anonymous" : playerName,
+                                         gameMode: "Tap Frenzy",
+                                         score: score,
+                                         date: Date())
+                var currentHistory = RoundResult.load(from: historyJSON)
+                currentHistory.append(result)
+                historyJSON = RoundResult.save(currentHistory)
             }
         }
     }
