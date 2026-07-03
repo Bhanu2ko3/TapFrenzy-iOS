@@ -92,7 +92,7 @@ struct QuizRushGameView: View {
             
             // Timer Bar
             VStack(spacing: 5) {
-                ProgressView(value: Double(viewModel.timeRemaining), total: 15.0)
+                ProgressView(value: Double(viewModel.timeRemaining), total: 20.0)
                     .progressViewStyle(LinearProgressViewStyle(tint: timerColor()))
                     .scaleEffect(x: 1, y: 1.5, anchor: .center)
                     .animation(.linear(duration: 1.0), value: viewModel.timeRemaining)
@@ -137,7 +137,7 @@ struct QuizRushGameView: View {
             
             // Answers Grid
             VStack(spacing: 15) {
-                ForEach(currentQuestion.allAnswers, id: \.self) { answer in
+                ForEach(viewModel.currentAnswers, id: \.self) { answer in
                     Button(action: {
                         viewModel.submitAnswer(answer)
                     }) {
@@ -167,8 +167,8 @@ struct QuizRushGameView: View {
     // MARK: - Styling Helpers
     
     private func timerColor() -> Color {
-        if viewModel.timeRemaining > 8 { return .green }
-        if viewModel.timeRemaining > 4 { return .orange }
+        if viewModel.timeRemaining > 10 { return .green }
+        if viewModel.timeRemaining > 5 { return .orange }
         return .red
     }
     

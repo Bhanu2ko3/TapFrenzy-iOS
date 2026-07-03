@@ -12,6 +12,7 @@ enum QuizViewState {
 class QuizViewModel: ObservableObject {
     @Published var viewState: QuizViewState = .loading
     @Published var questions: [TriviaQuestion] = []
+    @Published var currentAnswers: [String] = [] // Holds the answers for the current question so they don't reshuffle on UI updates
     
     @Published var currentIndex: Int = 0
     @Published var score: Int = 0
@@ -19,7 +20,7 @@ class QuizViewModel: ObservableObject {
     @Published var longestStreak: Int = 0
     
     // Timer properties
-    @Published var timeRemaining: Int = 15
+    @Published var timeRemaining: Int = 20
     private var timerCancellable: AnyCancellable?
     
     // Animation properties
@@ -38,6 +39,9 @@ class QuizViewModel: ObservableObject {
         do {
             let fetchedQuestions = try await TriviaService.fetchQuestions()
             self.questions = fetchedQuestions
+            if !self.questions.isEmpty {
+                self.currentAnswers = self.questions[0].allAnswers
+            }
             self.viewState = .loaded
             self.startTimer()
         } catch {
@@ -46,7 +50,7 @@ class QuizViewModel: ObservableObject {
     }
     
     func startTimer() {
-        timeRemaining = 15
+        timeRemaining = 20
         timerCancellable?.cancel()
         timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
@@ -115,6 +119,7 @@ class QuizViewModel: ObservableObject {
             
             if currentIndex < questions.count - 1 {
                 currentIndex += 1
+                currentAnswers = questions[currentIndex].allAnswers // Shuffle once for the new question
                 startTimer() // Restart timer for the next question
             } else {
                 viewState = .completed
