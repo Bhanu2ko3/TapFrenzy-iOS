@@ -19,8 +19,8 @@ struct GameView: View {
             // Header Section: Title and Live Countdown Display
             VStack(spacing: 10) {
                 Text("Tap Frenzy")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.system(size: 38, weight: .black, design: .rounded))
+                    .foregroundColor(.blue)
                 
                 Text("Time Remaining: \(timeRemaining)s")
                     .font(.title2)
@@ -37,7 +37,9 @@ struct GameView: View {
                     .font(.headline)
                     .foregroundColor(.gray)
                 Text("\(score)")
-                    .font(.system(size: 80, weight: .bold, design: .rounded))
+                    .font(.system(size: 100, weight: .black, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundColor(.primary)
             }
             
             Spacer()

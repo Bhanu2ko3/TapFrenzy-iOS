@@ -178,10 +178,13 @@ struct LightItUpGameView: View {
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
-                            Text("Score: \(score)")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.green)
+                            Text("Score")
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                            Text("\(score)")
+                                .font(.system(size: 45, weight: .black, design: .rounded))
+                                .monospacedDigit()
+                                .foregroundColor(.primary)
                             Text("Best: \(highScore)")
                                 .font(.caption)
                                 .foregroundColor(.gray)

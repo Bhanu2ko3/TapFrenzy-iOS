@@ -213,8 +213,8 @@ struct QuizRushGameView: View {
             
             // Score Display
             Text("Score: \(viewModel.score)")
-                .font(.title2)
-                .fontWeight(.black)
+                .font(.system(size: 32, weight: .black, design: .rounded))
+                .monospacedDigit()
                 .foregroundColor(.indigo)
             
             // Timer Bar
