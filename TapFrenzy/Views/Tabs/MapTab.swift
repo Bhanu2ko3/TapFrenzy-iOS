@@ -52,8 +52,6 @@ struct MapTab: View {
             .onAppear {
                 let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
                 items = [HubGameSession].deserialize(from: rawLedger)
-                region.center = CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612)
-                region.span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             }
         }
     }
