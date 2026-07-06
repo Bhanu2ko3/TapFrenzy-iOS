@@ -9,7 +9,17 @@ struct TapFrenzyView: View {
     @State private var buttonOffsetY: CGFloat = 0.0
     
     var buttonSize: CGFloat {
-        viewModel.secondsLeft <= 5 ? 100 : 180
+        80.0 + CGFloat(viewModel.secondsLeft) * 10.0
+    }
+    
+    var buttonFont: Font {
+        if viewModel.secondsLeft <= 4 {
+            return .body
+        } else if viewModel.secondsLeft <= 7 {
+            return .headline
+        } else {
+            return .title
+        }
     }
     
     var topScores: [HubGameSession] {
@@ -134,20 +144,15 @@ struct TapFrenzyView: View {
                     
                     Button(action: {
                         viewModel.registerTap()
-                        if viewModel.secondsLeft <= 5 {
-                            buttonOffsetX = CGFloat.random(in: -80...80)
-                            buttonOffsetY = CGFloat.random(in: -120...120)
-                        } else {
-                            buttonOffsetX = 0
-                            buttonOffsetY = 0
-                        }
+                        buttonOffsetX = CGFloat.random(in: -80...80)
+                        buttonOffsetY = CGFloat.random(in: -120...120)
                     }) {
                         Circle()
                             .fill(viewModel.activeColor)
                             .frame(width: buttonSize, height: buttonSize)
                             .overlay(
                                 Text("TAP ME")
-                                    .font(viewModel.secondsLeft <= 5 ? .body : .title)
+                                    .font(buttonFont)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                             )
