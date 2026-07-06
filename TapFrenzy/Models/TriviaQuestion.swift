@@ -1,6 +1,5 @@
 import Foundation
 
-// Outer wrapper for the API response
 struct TriviaResponse: Codable {
     let responseCode: Int
     let results: [TriviaQuestion]
@@ -11,7 +10,6 @@ struct TriviaResponse: Codable {
     }
 }
 
-// Data model representing a single question
 struct TriviaQuestion: Codable, Identifiable {
     let id = UUID()
     let type: String
@@ -27,7 +25,6 @@ struct TriviaQuestion: Codable, Identifiable {
         case incorrectAnswers = "incorrect_answers"
     }
     
-    // Decodes basic HTML entities like &quot; and &#039;
     var decodedQuestion: String {
         return question
             .replacingOccurrences(of: "&quot;", with: "\"")
@@ -43,7 +40,6 @@ struct TriviaQuestion: Codable, Identifiable {
             .replacingOccurrences(of: "&amp;", with: "&")
     }
     
-    // Combines and shuffles all possible answers for the UI
     var allAnswers: [String] {
         var answers = incorrectAnswers.map { 
             $0.replacingOccurrences(of: "&quot;", with: "\"")
