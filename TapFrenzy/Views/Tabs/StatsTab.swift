@@ -1,8 +1,30 @@
 import Charts
 import SwiftUI
 
+struct ChartData: Identifiable {
+    let id: UUID
+    let label: String
+    let score: Int
+    let mode: AppGameMode
+}
+
 struct StatsTab: View {
     @StateObject private var viewModel = StatsVM()
+    
+    var chartData: [ChartData] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        let recent = Array(viewModel.gameHistory.prefix(7)).reversed()
+        return recent.enumerated().map { index, session in
+            ChartData(
+                id: session.id,
+                label: "#\(recent.count - index) (\(formatter.string(from: session.playedAt)))",
+                score: session.finalScore,
+                mode: session.mode
+            )
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -70,12 +92,12 @@ struct StatsTab: View {
                     
                     if !viewModel.gameHistory.isEmpty {
                         HubActionCard(title: "Points Chart", iconName: "chart.bar.fill", highlightColor: .green) {
-                            Chart(viewModel.gameHistory.prefix(15)) { session in
+                            Chart(chartData) { data in
                                 BarMark(
-                                    x: .value("Session", session.playedAt, unit: .second),
-                                    y: .value("Score", session.finalScore)
+                                    x: .value("Session", data.label),
+                                    y: .value("Score", data.score)
                                 )
-                                .foregroundStyle(session.mode == .frenzySpeed ? Color.blue : (session.mode == .gridMatch ? Color.purple : Color.indigo))
+                                .foregroundStyle(data.mode == .frenzySpeed ? Color.blue : (data.mode == .gridMatch ? Color.purple : Color.indigo))
                             }
                             .frame(height: 180)
                             .padding(.top, 8)
