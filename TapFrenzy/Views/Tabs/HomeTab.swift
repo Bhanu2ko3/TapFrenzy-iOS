@@ -88,20 +88,19 @@ struct ProfileView: View {
     @State private var items: [HubGameSession] = []
     
     var playerHistory: [HubGameSession] {
-        items.sorted(by: { $0.playedAt > $1.playedAt })
+        items.filter { $0.playerName == playerName }.sorted(by: { $0.playedAt > $1.playedAt })
     }
     
     var totalGames: Int {
-        items.filter { $0.playerName == playerName }.count
+        playerHistory.count
     }
     
     var totalScore: Int {
-        items.filter { $0.playerName == playerName }.reduce(0) { $0 + $1.finalScore }
+        playerHistory.reduce(0) { $0 + $1.finalScore }
     }
     
     var favoriteGame: String {
-        let filtered = items.filter { $0.playerName == playerName }
-        let modes = filtered.map { $0.mode }
+        let modes = playerHistory.map { $0.mode }
         let counts = modes.reduce(into: [:]) { counts, mode in counts[mode, default: 0] += 1 }
         guard let maxMode = counts.max(by: { $0.1 < $1.1 })?.key else { return "None" }
         switch maxMode {
@@ -188,17 +187,9 @@ struct ProfileView: View {
                                     Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
                                         .font(.subheadline)
                                         .fontWeight(.semibold)
-                                    HStack {
-                                        Text("Player: \(session.playerName)")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                        Text("•")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                        Text(session.playedAt, style: .date)
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                    }
+                                    Text(session.playedAt, style: .date)
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
                                 }
                                 Spacer()
                                 Text("\(session.finalScore) pts")

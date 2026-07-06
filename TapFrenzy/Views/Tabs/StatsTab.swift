@@ -106,21 +106,30 @@ struct StatsTab: View {
                         
                         HubActionCard(title: "Recent Games", iconName: "clock.fill", highlightColor: .orange) {
                             VStack(spacing: 12) {
-                                ForEach(viewModel.gameHistory.prefix(5)) { session in
+                                ForEach(viewModel.gameHistory) { session in
                                     HStack {
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
                                                 .font(.headline)
-                                            Text(session.playedAt, style: .date)
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
+                                            
+                                            HStack {
+                                                Text("Player: \(session.playerName)")
+                                                    .font(.caption)
+                                                    .foregroundColor(.secondary)
+                                                Text("•")
+                                                    .font(.caption)
+                                                    .foregroundColor(.secondary)
+                                                Text(session.playedAt, style: .date)
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                            }
                                         }
                                         Spacer()
                                         Text("\(session.finalScore) pts")
                                             .font(.headline)
                                             .foregroundColor(session.mode == .frenzySpeed ? .blue : (session.mode == .gridMatch ? .purple : .indigo))
                                     }
-                                    if session.id != viewModel.gameHistory.prefix(5).last?.id {
+                                    if session.id != viewModel.gameHistory.last?.id {
                                         Divider()
                                     }
                                 }

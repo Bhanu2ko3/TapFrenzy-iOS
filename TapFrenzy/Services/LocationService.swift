@@ -1,5 +1,6 @@
 import CoreLocation
 
+@MainActor
 class HubLocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     @Published var latitude: Double = 0.0
@@ -13,9 +14,11 @@ class HubLocationService: NSObject, ObservableObject, CLLocationManagerDelegate 
         manager.startUpdatingLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latest = locations.last else { return }
-        latitude = latest.coordinate.latitude
-        longitude = latest.coordinate.longitude
+        Task { @MainActor in
+            self.latitude = latest.coordinate.latitude
+            self.longitude = latest.coordinate.longitude
+        }
     }
 }
