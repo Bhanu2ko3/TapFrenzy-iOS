@@ -3,14 +3,26 @@ import SwiftUI
 @main
 struct PlayHubApp: App {
     @AppStorage("currentPlayerName") private var playerName: String = ""
+    @AppStorage("appTheme") private var appTheme: Int = 0
+    
+    var preferredColorScheme: ColorScheme? {
+        switch appTheme {
+        case 1: return .light
+        case 2: return .dark
+        default: return nil
+        }
+    }
     
     var body: some Scene {
         WindowGroup {
-            if playerName.isEmpty {
-                WelcomeView()
-            } else {
-                PlayHubMainApp()
+            Group {
+                if playerName.isEmpty {
+                    WelcomeView()
+                } else {
+                    PlayHubMainApp()
+                }
             }
+            .preferredColorScheme(preferredColorScheme)
         }
     }
 }

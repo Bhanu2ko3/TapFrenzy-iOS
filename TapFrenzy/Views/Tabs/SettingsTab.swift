@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsTab: View {
     @AppStorage("dailyNotificationsEnabled") private var notificationsEnabled = false
+    @AppStorage("appTheme") private var appTheme = 0
     @State private var targetTime = Date()
     @State private var showingResetConfirmation = false
     @StateObject private var statsViewModel = StatsVM()
@@ -26,6 +27,15 @@ struct SettingsTab: View {
                                 NotificationService.scheduleDailyChallenge(at: newTime)
                             }
                     }
+                }
+                
+                Section(header: Text("Appearance")) {
+                    Picker("App Theme", selection: $appTheme) {
+                        Text("System").tag(0)
+                        Text("Light").tag(1)
+                        Text("Dark").tag(2)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
                 
                 Section(header: Text("Arcade Database")) {

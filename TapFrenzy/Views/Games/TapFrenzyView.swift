@@ -5,6 +5,13 @@ struct TapFrenzyView: View {
     @StateObject private var locationService = HubLocationService()
     @Environment(\.dismiss) var dismiss
     
+    @State private var buttonOffsetX: CGFloat = 0.0
+    @State private var buttonOffsetY: CGFloat = 0.0
+    
+    var buttonSize: CGFloat {
+        viewModel.secondsLeft <= 5 ? 100 : 180
+    }
+    
     var body: some View {
         VStack {
             if !viewModel.gameHasStarted {
@@ -30,6 +37,8 @@ struct TapFrenzyView: View {
                     Spacer()
                     
                     Button(action: {
+                        buttonOffsetX = 0
+                        buttonOffsetY = 0
                         viewModel.startNewGame()
                     }) {
                         HStack {
@@ -71,19 +80,26 @@ struct TapFrenzyView: View {
                     
                     Button(action: {
                         viewModel.registerTap()
+                        if viewModel.secondsLeft <= 5 {
+                            buttonOffsetX = CGFloat.random(in: -80...80)
+                            buttonOffsetY = CGFloat.random(in: -120...120)
+                        } else {
+                            buttonOffsetX = 0
+                            buttonOffsetY = 0
+                        }
                     }) {
                         Circle()
                             .fill(viewModel.activeColor)
-                            .frame(width: 180, height: 180)
+                            .frame(width: buttonSize, height: buttonSize)
                             .overlay(
                                 Text("TAP ME")
-                                    .font(.title)
+                                    .font(viewModel.secondsLeft <= 5 ? .body : .title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                             )
                             .shadow(color: viewModel.activeColor.opacity(0.4), radius: 15, x: 0, y: 10)
-                            .scaleEffect(viewModel.isBonusState ? 1.1 : 1.0)
-                            .animation(.spring(), value: viewModel.isBonusState)
+                            .offset(x: buttonOffsetX, y: buttonOffsetY)
+                            .animation(.spring(), value: buttonOffsetX)
                     }
                     
                     Spacer()
@@ -122,6 +138,8 @@ struct TapFrenzyView: View {
                 highScore: best,
                 mode: .frenzySpeed,
                 onReset: {
+                    buttonOffsetX = 0
+                    buttonOffsetY = 0
                     viewModel.startNewGame()
                 },
                 onHome: {
