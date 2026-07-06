@@ -1,6 +1,12 @@
 import SwiftUI
 import Combine
 
+enum NetworkState {
+    case loading
+    case active
+    case error
+}
+
 @MainActor
 class QuizEngineVM: ObservableObject {
     @Published var networkState: NetworkState = .loading
