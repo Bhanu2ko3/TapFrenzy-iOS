@@ -30,7 +30,7 @@ struct MapTab: View {
     
     var body: some View {
         NavigationStack {
-            Map(coordinateRegion: $region, annotationItems: annotations) { item in
+            Map(coordinateRegion: .constant(region), annotationItems: annotations) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     VStack(spacing: 4) {
                         Image(systemName: "mappin.circle.fill")
