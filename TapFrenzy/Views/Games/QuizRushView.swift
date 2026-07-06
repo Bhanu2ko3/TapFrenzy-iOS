@@ -112,9 +112,20 @@ struct QuizRushView: View {
                             .font(.system(size: 32, weight: .black, design: .rounded))
                             .foregroundColor(.indigo)
                         
-                        ProgressView(value: Double(viewModel.timeRemaining), total: 20.0)
-                            .tint(.indigo)
-                            .padding(.horizontal, 20)
+                        VStack(spacing: 8) {
+                            ProgressView(value: Double(viewModel.timeRemaining), total: 20.0)
+                                .tint(.indigo)
+                                .padding(.horizontal, 20)
+                            
+                            HStack(spacing: 4) {
+                                Image(systemName: "timer")
+                                    .foregroundColor(.indigo)
+                                Text("\(viewModel.timeRemaining)s")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.indigo)
+                            }
+                        }
                         
                         Spacer()
                         
@@ -135,7 +146,7 @@ struct QuizRushView: View {
                             Spacer()
                             
                             VStack(spacing: 12) {
-                                ForEach(currentQuestion.allAnswers, id: \.self) { answer in
+                                ForEach(viewModel.currentAnswers, id: \.self) { answer in
                                     Button(action: {
                                         viewModel.submitAnswer(
                                             answer,

@@ -14,6 +14,7 @@ class QuizEngineVM: ObservableObject {
     @Published var currentActiveIndex: Int = 0
     @Published var runningScore: Int = 0
     @Published var consecutiveStreak: Int = 0
+    @Published var currentAnswers: [String] = []
     
     @Published var timeRemaining: Int = 20
     @Published var selectedAnswer: String? = nil
@@ -35,6 +36,7 @@ class QuizEngineVM: ObservableObject {
             let fetched = try await HubTriviaService.fetchQuestions()
             questionList = fetched
             if !questionList.isEmpty {
+                currentAnswers = questionList[0].allAnswers
                 networkState = .active
                 startTimer()
             } else {
@@ -110,6 +112,7 @@ class QuizEngineVM: ObservableObject {
             
             if currentActiveIndex < questionList.count - 1 {
                 currentActiveIndex += 1
+                currentAnswers = questionList[currentActiveIndex].allAnswers
                 startTimer()
             } else {
                 saveFinalSession(latitude: latitude, longitude: longitude)
