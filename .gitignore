@@ -1,0 +1,12 @@
+.DS_Store
+build/
+DerivedData/
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+*.mode1v3
+*.mode2v3
+*.nib
+*.perspectivev3
+xcuserdata/
+.build/
+Pods/

@@ -75,43 +75,40 @@ struct HubMenuButton: View {
     let title: String
     let subtitle: String
     let themeColor: Color
-    let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: 16) {
-                Image(systemName: iconName)
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .frame(width: 54, height: 54)
-                    .background(themeColor)
-                    .cornerRadius(12)
-                    .shadow(color: themeColor.opacity(0.4), radius: 6, x: 0, y: 3)
+        HStack(spacing: 16) {
+            Image(systemName: iconName)
+                .font(.title)
+                .foregroundColor(.white)
+                .frame(width: 54, height: 54)
+                .background(themeColor)
+                .cornerRadius(12)
+                .shadow(color: themeColor.opacity(0.4), radius: 6, x: 0, y: 3)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.primary)
                 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
-            .padding()
-            .background(Color(.systemBackground))
-            .cornerRadius(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(.systemGray6), lineWidth: 1)
-            )
-            .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .font(.footnote)
+                .foregroundColor(.gray)
         }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(.systemGray6), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
     }
 }
