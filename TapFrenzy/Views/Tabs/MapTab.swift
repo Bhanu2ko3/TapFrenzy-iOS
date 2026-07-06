@@ -11,8 +11,8 @@ struct IdentifiableLocation: Identifiable {
 struct MapTab: View {
     @State private var items: [HubGameSession] = []
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-        span: MKCoordinateSpan(latitudeDelta: 10.0, longitudeDelta: 10.0)
+        center: CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612),
+        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
     
     var annotations: [IdentifiableLocation] {

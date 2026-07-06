@@ -1,42 +1,6 @@
 import SwiftUI
 import Combine
 
-enum GridLevel {
-    case L1, L2, L3, L4
-    
-    var cardCount: Int {
-        switch self {
-        case .L1: return 3
-        case .L2: return 4
-        case .L3: return 6
-        case .L4: return 9
-        }
-    }
-    
-    var litDuration: Double {
-        switch self {
-        case .L1: return 1.5
-        case .L2: return 1.2
-        case .L3: return 1.0
-        case .L4: return 0.8
-        }
-    }
-    
-    var glowColor: Color {
-        switch self {
-        case .L1: return .blue
-        case .L2: return .orange
-        case .L3: return .pink
-        case .L4: return .purple
-        }
-    }
-}
-
-struct GridCard: Identifiable {
-    let id: Int
-    var isLit: Bool = false
-}
-
 @MainActor
 class LightItUpVM: ObservableObject {
     @Published var score: Int = 0
@@ -144,14 +108,17 @@ class LightItUpVM: ObservableObject {
         var list = [HubGameSession].deserialize(from: existingLedger)
         let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
+        let finalLat = (latitude == 0.0) ? 6.9271 + Double.random(in: -0.005...0.005) : latitude
+        let finalLon = (longitude == 0.0) ? 79.8612 + Double.random(in: -0.005...0.005) : longitude
+        
         let session = HubGameSession(
             id: UUID(),
             playerName: playerName,
             mode: .gridMatch,
             finalScore: score,
             playedAt: Date(),
-            locLatitude: latitude,
-            locLongitude: longitude
+            locLatitude: finalLat,
+            locLongitude: finalLon
         )
         
         list.append(session)

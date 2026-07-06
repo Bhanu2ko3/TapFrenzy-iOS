@@ -7,6 +7,24 @@ struct QuizRushView: View {
     
     @State private var gameInitiated = false
     
+    var topScores: [HubGameSession] {
+        let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
+        let allSessions = [HubGameSession].deserialize(from: rawLedger)
+        let modeSessions = allSessions.filter { $0.mode == .triviaQuiz }
+        
+        var uniqueBests: [String: HubGameSession] = [:]
+        for session in modeSessions {
+            if let existing = uniqueBests[session.playerName] {
+                if session.finalScore > existing.finalScore {
+                    uniqueBests[session.playerName] = session
+                }
+            } else {
+                uniqueBests[session.playerName] = session
+            }
+        }
+        return Array(uniqueBests.values.sorted(by: { $0.finalScore > $1.finalScore }).prefix(3))
+    }
+    
     var body: some View {
         VStack {
             if !gameInitiated {
@@ -28,6 +46,42 @@ struct QuizRushView: View {
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 30)
+                    
+                    Spacer()
+                    
+                    VStack(spacing: 10) {
+                        HStack {
+                            Image(systemName: "list.star")
+                                .foregroundColor(.yellow)
+                            Text("Top Players")
+                                .font(.headline)
+                        }
+                        
+                        if topScores.isEmpty {
+                            Text("No scores yet. Be the first!")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        } else {
+                            ForEach(Array(topScores.enumerated()), id: \.element.id) { index, result in
+                                  HStack {
+                                      Text("\(index + 1).")
+                                          .fontWeight(.bold)
+                                          .foregroundColor(.gray)
+                                      Text(result.playerName)
+                                          .fontWeight(.semibold)
+                                      Spacer()
+                                      Text("\(result.finalScore)")
+                                          .fontWeight(.bold)
+                                          .foregroundColor(.indigo)
+                                  }
+                                  .padding(.horizontal, 20)
+                                  .padding(.vertical, 8)
+                                  .background(Color(.systemGray6))
+                                  .cornerRadius(8)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 30)
                     
                     Spacer()
                     
@@ -178,6 +232,25 @@ struct QuizRushView: View {
         }
         .navigationTitle("Quiz Rush")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .font(.title3)
+                        Text("Home")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.indigo)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.indigo.opacity(0.15))
+                    .cornerRadius(20)
+                }
+            }
+        }
         .fullScreenCover(isPresented: $viewModel.gameIsCompleted) {
             let best = UserDefaults.standard.integer(forKey: "highScore_quizRush")
             ResultView(

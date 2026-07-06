@@ -77,14 +77,17 @@ class TapFrenzyVM: ObservableObject {
         var list = [HubGameSession].deserialize(from: existingLedger)
         let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
+        let finalLat = (latitude == 0.0) ? 6.9271 + Double.random(in: -0.005...0.005) : latitude
+        let finalLon = (longitude == 0.0) ? 79.8612 + Double.random(in: -0.005...0.005) : longitude
+        
         let session = HubGameSession(
             id: UUID(),
             playerName: playerName,
             mode: .frenzySpeed,
             finalScore: currentScore,
             playedAt: Date(),
-            locLatitude: latitude,
-            locLongitude: longitude
+            locLatitude: finalLat,
+            locLongitude: finalLon
         )
         
         list.append(session)
