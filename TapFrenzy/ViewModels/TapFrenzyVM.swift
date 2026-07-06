@@ -75,9 +75,11 @@ class TapFrenzyVM: ObservableObject {
     func saveSessionWithLocation(latitude: Double, longitude: Double) {
         let existingLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
         var list = [HubGameSession].deserialize(from: existingLedger)
+        let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
         let session = HubGameSession(
             id: UUID(),
+            playerName: playerName,
             mode: .frenzySpeed,
             finalScore: currentScore,
             playedAt: Date(),

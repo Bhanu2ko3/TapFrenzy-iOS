@@ -1,12 +1,6 @@
 import SwiftUI
 import Combine
 
-enum NetworkState {
-    case loading
-    case active
-    case error
-}
-
 @MainActor
 class QuizEngineVM: ObservableObject {
     @Published var networkState: NetworkState = .loading
@@ -123,9 +117,11 @@ class QuizEngineVM: ObservableObject {
     private func saveFinalSession(latitude: Double, longitude: Double) {
         let existingLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
         var list = [HubGameSession].deserialize(from: existingLedger)
+        let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
         let session = HubGameSession(
             id: UUID(),
+            playerName: playerName,
             mode: .triviaQuiz,
             finalScore: runningScore,
             playedAt: Date(),

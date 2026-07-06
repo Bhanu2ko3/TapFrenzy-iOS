@@ -2,6 +2,7 @@ import Foundation
 
 struct HubGameSession: Identifiable, Codable {
     let id: UUID
+    let playerName: String
     let mode: AppGameMode
     let finalScore: Int
     let playedAt: Date
