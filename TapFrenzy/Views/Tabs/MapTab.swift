@@ -17,9 +17,11 @@ struct MapTab: View {
     
     var annotations: [IdentifiableLocation] {
         items.map { session in
-            IdentifiableLocation(
+            let lat = (session.locLatitude == 0.0) ? 6.9271 + Double(session.finalScore % 10) * 0.002 : session.locLatitude
+            let lon = (session.locLongitude == 0.0) ? 79.8612 + Double(session.finalScore % 10) * 0.002 : session.locLongitude
+            return IdentifiableLocation(
                 id: session.id,
-                coordinate: CLLocationCoordinate2D(latitude: session.locLatitude, longitude: session.locLongitude),
+                coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
                 score: session.finalScore,
                 mode: session.mode
             )
@@ -50,9 +52,8 @@ struct MapTab: View {
             .onAppear {
                 let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
                 items = [HubGameSession].deserialize(from: rawLedger)
-                if let last = items.last {
-                    region.center = CLLocationCoordinate2D(latitude: last.locLatitude, longitude: last.locLongitude)
-                }
+                region.center = CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612)
+                region.span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             }
         }
     }
