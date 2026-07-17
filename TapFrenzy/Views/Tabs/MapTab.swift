@@ -5,7 +5,7 @@ struct IdentifiableLocation: Identifiable {
     let id: UUID
     let coordinate: CLLocationCoordinate2D
     let score: Int
-    let mode: AppGameMode
+    let mode: GameMode
 }
 
 struct MapTab: View {
@@ -85,15 +85,15 @@ struct MapTab: View {
             .navigationTitle("Geotags")
             .onAppear {
                 let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
-                let items = [HubGameSession].deserialize(from: rawLedger)
+                let items = [GameSession].deserialize(from: rawLedger)
                 
                 self.annotations = items.map { session in
-                    let lat = (session.locLatitude == 0.0) ? 6.9271 + Double(session.finalScore % 10) * 0.002 : session.locLatitude
-                    let lon = (session.locLongitude == 0.0) ? 79.8612 + Double(session.finalScore % 10) * 0.002 : session.locLongitude
+                    let lat = (session.latitude == 0.0) ? 6.9271 + Double(session.score % 10) * 0.002 : session.latitude
+                    let lon = (session.longitude == 0.0) ? 79.8612 + Double(session.score % 10) * 0.002 : session.longitude
                     return IdentifiableLocation(
                         id: session.id,
                         coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-                        score: session.finalScore,
+                        score: session.score,
                         mode: session.mode
                     )
                 }

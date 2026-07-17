@@ -1,6 +1,6 @@
 import Foundation
 
-enum AppGameMode: String, Codable {
+enum GameMode: String, Codable {
     case frenzySpeed
     case gridMatch
     case triviaQuiz

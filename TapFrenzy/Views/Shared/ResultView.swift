@@ -3,7 +3,7 @@ import SwiftUI
 struct ResultView: View {
     let score: Int
     let highScore: Int
-    let mode: AppGameMode
+    let mode: GameMode
     let onReset: () -> Void
     let onHome: () -> Void
     

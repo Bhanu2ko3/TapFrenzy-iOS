@@ -85,14 +85,14 @@ struct HomeTab: View {
 struct ProfileView: View {
     @AppStorage("currentPlayerName") private var playerName: String = ""
     @Environment(\.dismiss) var dismiss
-    @State private var items: [HubGameSession] = []
+    @State private var items: [GameSession] = []
     @State private var visibleLimit: Int = 10
     
-    var playerHistory: [HubGameSession] {
-        items.filter { $0.playerName == playerName }.sorted(by: { $0.playedAt > $1.playedAt })
+    var playerHistory: [GameSession] {
+        items.filter { $0.playerName == playerName }.sorted(by: { $0.timestamp > $1.timestamp })
     }
     
-    var limitedPlayerHistory: [HubGameSession] {
+    var limitedPlayerHistory: [GameSession] {
         Array(playerHistory.prefix(visibleLimit))
     }
     
@@ -101,7 +101,7 @@ struct ProfileView: View {
     }
     
     var totalScore: Int {
-        playerHistory.reduce(0) { $0 + $1.finalScore }
+        playerHistory.reduce(0) { $0 + $1.score }
     }
     
     var favoriteGame: String {
@@ -193,12 +193,12 @@ struct ProfileView: View {
                                         Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
                                             .font(.subheadline)
                                             .fontWeight(.semibold)
-                                        Text(session.playedAt, style: .date)
+                                        Text(session.timestamp, style: .date)
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                     }
                                     Spacer()
-                                    Text("\(session.finalScore) pts")
+                                    Text("\(session.score) pts")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
                                 }
@@ -255,7 +255,7 @@ struct ProfileView: View {
             }
             .onAppear {
                 let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
-                items = [HubGameSession].deserialize(from: rawLedger)
+                items = [GameSession].deserialize(from: rawLedger)
             }
         }
     }

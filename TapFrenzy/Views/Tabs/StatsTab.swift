@@ -5,7 +5,7 @@ struct ChartData: Identifiable {
     let id: UUID
     let label: String
     let score: Int
-    let mode: AppGameMode
+    let mode: GameMode
 }
 
 struct StatsTab: View {
@@ -20,8 +20,8 @@ struct StatsTab: View {
         return recent.enumerated().map { index, session in
             ChartData(
                 id: session.id,
-                label: "#\(recent.count - index) (\(formatter.string(from: session.playedAt)))",
-                score: session.finalScore,
+                label: "#\(recent.count - index) (\(formatter.string(from: session.timestamp)))",
+                score: session.score,
                 mode: session.mode
             )
         }
@@ -120,13 +120,13 @@ struct StatsTab: View {
                                                 Text("•")
                                                     .font(.caption)
                                                     .foregroundColor(.secondary)
-                                                Text(session.playedAt, style: .date)
+                                                Text(session.timestamp, style: .date)
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
                                             }
                                         }
                                         Spacer()
-                                        Text("\(session.finalScore) pts")
+                                        Text("\(session.score) pts")
                                             .font(.headline)
                                             .foregroundColor(session.mode == .frenzySpeed ? .blue : (session.mode == .gridMatch ? .purple : .indigo))
                                     }
