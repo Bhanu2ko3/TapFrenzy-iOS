@@ -18,23 +18,11 @@ struct MapTab: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Map(coordinateRegion: $region, annotationItems: annotations) { item in
-                    MapAnnotation(coordinate: item.coordinate) {
-                        VStack(spacing: 4) {
-                            Image(systemName: "mappin.circle.fill")
-                                .font(.title)
-                                .foregroundColor(item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo))
-                            
-                            Text("\(item.score)")
-                                .font(.caption)
-                                .fontWeight(.bold)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color(.systemBackground))
-                                .cornerRadius(8)
-                                .shadow(radius: 2)
-                        }
-                    }
+                Map(coordinateRegion: .constant(region), annotationItems: annotations) { item in
+                    MapMarker(
+                        coordinate: item.coordinate,
+                        tint: item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo)
+                    )
                 }
                 .frame(height: 300)
                 
