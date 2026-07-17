@@ -86,9 +86,14 @@ struct ProfileView: View {
     @AppStorage("currentPlayerName") private var playerName: String = ""
     @Environment(\.dismiss) var dismiss
     @State private var items: [HubGameSession] = []
+    @State private var visibleLimit: Int = 10
     
     var playerHistory: [HubGameSession] {
         items.filter { $0.playerName == playerName }.sorted(by: { $0.playedAt > $1.playedAt })
+    }
+    
+    var limitedPlayerHistory: [HubGameSession] {
+        Array(playerHistory.prefix(visibleLimit))
     }
     
     var totalGames: Int {
@@ -181,20 +186,37 @@ struct ProfileView: View {
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .center)
                     } else {
-                        List(playerHistory) { session in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
+                        List {
+                            ForEach(limitedPlayerHistory) { session in
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
+                                            .font(.subheadline)
+                                            .fontWeight(.semibold)
+                                        Text(session.playedAt, style: .date)
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                    Text("\(session.finalScore) pts")
                                         .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                    Text(session.playedAt, style: .date)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
+                                        .fontWeight(.bold)
                                 }
-                                Spacer()
-                                Text("\(session.finalScore) pts")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                            }
+                            
+                            if playerHistory.count > visibleLimit {
+                                Button(action: {
+                                    withAnimation {
+                                        visibleLimit += 10
+                                    }
+                                }) {
+                                    Text("Load More")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .padding(.vertical, 8)
+                                }
                             }
                         }
                         .listStyle(PlainListStyle())

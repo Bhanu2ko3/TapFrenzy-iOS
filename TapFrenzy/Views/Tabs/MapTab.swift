@@ -14,6 +14,11 @@ struct MapTab: View {
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
     @State private var annotations: [IdentifiableLocation] = []
+    @State private var visibleLimit: Int = 10
+    
+    var limitedAnnotations: [IdentifiableLocation] {
+        Array(annotations.prefix(visibleLimit))
+    }
     
     var body: some View {
         NavigationStack {
@@ -39,20 +44,37 @@ struct MapTab: View {
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .center)
                     } else {
-                        List(annotations) { item in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.mode == .frenzySpeed ? "Tap Frenzy" : (item.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
+                        List {
+                            ForEach(limitedAnnotations) { item in
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(item.mode == .frenzySpeed ? "Tap Frenzy" : (item.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                        Text(String(format: "Lat: %.4f, Lon: %.4f", item.coordinate.latitude, item.coordinate.longitude))
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                    Text("\(item.score) pts")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
-                                    Text(String(format: "Lat: %.4f, Lon: %.4f", item.coordinate.latitude, item.coordinate.longitude))
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
                                 }
-                                Spacer()
-                                Text("\(item.score) pts")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                            }
+                            
+                            if annotations.count > visibleLimit {
+                                Button(action: {
+                                    withAnimation {
+                                        visibleLimit += 10
+                                    }
+                                }) {
+                                    Text("Load More")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .padding(.vertical, 8)
+                                }
                             }
                         }
                         .listStyle(PlainListStyle())
