@@ -7,18 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7484A3752FDC429C00F044A7 /* TapFrenzyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */; };
-		7484A3772FDC429C00F044A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3762FDC429C00F044A7 /* ContentView.swift */; };
+		743E3DB52FFB830D00C402E9 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DB32FFB830D00C402E9 /* GameSession.swift */; };
+		743E3DB62FFB830D00C402E9 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DB42FFB830D00C402E9 /* GameMode.swift */; };
+		743E3DBA2FFB833600C402E9 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DB72FFB833600C402E9 /* LocationService.swift */; };
+		743E3DBB2FFB833600C402E9 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DB82FFB833600C402E9 /* NotificationService.swift */; };
+		743E3DBC2FFB833600C402E9 /* TriviaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DB92FFB833600C402E9 /* TriviaAPI.swift */; };
+		743E3DC12FFB835800C402E9 /* TapFrenzyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DBD2FFB835800C402E9 /* TapFrenzyVM.swift */; };
+		743E3DC22FFB835800C402E9 /* StatsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DBE2FFB835800C402E9 /* StatsVM.swift */; };
+		743E3DC32FFB835800C402E9 /* QuizRushVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DBF2FFB835800C402E9 /* QuizRushVM.swift */; };
+		743E3DC42FFB835800C402E9 /* LightItUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DC02FFB835800C402E9 /* LightItUpVM.swift */; };
+		743E3DC72FFB83E700C402E9 /* PlayHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DC62FFB83E700C402E9 /* PlayHubApp.swift */; };
+		743E3DD62FFB83F200C402E9 /* PlayHubMainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DCA2FFB83F200C402E9 /* PlayHubMainApp.swift */; };
+		743E3DD72FFB83F200C402E9 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DCB2FFB83F200C402E9 /* StatsTab.swift */; };
+		743E3DD82FFB83F200C402E9 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DCC2FFB83F200C402E9 /* HomeTab.swift */; };
+		743E3DD92FFB83F200C402E9 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DCD2FFB83F200C402E9 /* SettingsTab.swift */; };
+		743E3DDA2FFB83F200C402E9 /* MapTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DCE2FFB83F200C402E9 /* MapTab.swift */; };
+		743E3DDB2FFB83F200C402E9 /* ScoreBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DD02FFB83F200C402E9 /* ScoreBadge.swift */; };
+		743E3DDC2FFB83F200C402E9 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DD12FFB83F200C402E9 /* ResultView.swift */; };
+		743E3DDD2FFB83F200C402E9 /* QuizRushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DD32FFB83F200C402E9 /* QuizRushView.swift */; };
+		743E3DDE2FFB83F200C402E9 /* TapFrenzyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DD42FFB83F200C402E9 /* TapFrenzyView.swift */; };
+		743E3DDF2FFB83F200C402E9 /* LightItUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E3DD52FFB83F200C402E9 /* LightItUpView.swift */; };
+		743FDBC42FF78BCF00AD355A /* TriviaQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743FDBC02FF78BCF00AD355A /* TriviaQuestion.swift */; };
 		7484A3792FDC429F00F044A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7484A3782FDC429F00F044A7 /* Assets.xcassets */; };
 		7484A37C2FDC429F00F044A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7484A37B2FDC429F00F044A7 /* Preview Assets.xcassets */; };
 		7484A3862FDC429F00F044A7 /* TapFrenzyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3852FDC429F00F044A7 /* TapFrenzyTests.swift */; };
 		7484A3902FDC429F00F044A7 /* TapFrenzyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A38F2FDC429F00F044A7 /* TapFrenzyUITests.swift */; };
 		7484A3922FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */; };
-		7484A39F2FDC432700F044A7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A39E2FDC432700F044A7 /* GameView.swift */; };
-		7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7484A3A02FDC433F00F044A7 /* GameOverView.swift */; };
-		749D8ED92FEEB6FB00953B38 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8ED82FEEB6FB00953B38 /* HomeView.swift */; };
-		749D8EDC2FEEBCAF00953B38 /* LightItUpGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */; };
-		749D8EDE2FEEBCDE00953B38 /* LightItUpGameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +53,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		743E3DB32FFB830D00C402E9 /* GameSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
+		743E3DB42FFB830D00C402E9 /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		743E3DB72FFB833600C402E9 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		743E3DB82FFB833600C402E9 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		743E3DB92FFB833600C402E9 /* TriviaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriviaAPI.swift; sourceTree = "<group>"; };
+		743E3DBD2FFB835800C402E9 /* TapFrenzyVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapFrenzyVM.swift; sourceTree = "<group>"; };
+		743E3DBE2FFB835800C402E9 /* StatsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsVM.swift; sourceTree = "<group>"; };
+		743E3DBF2FFB835800C402E9 /* QuizRushVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizRushVM.swift; sourceTree = "<group>"; };
+		743E3DC02FFB835800C402E9 /* LightItUpVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightItUpVM.swift; sourceTree = "<group>"; };
+		743E3DC62FFB83E700C402E9 /* PlayHubApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayHubApp.swift; sourceTree = "<group>"; };
+		743E3DCA2FFB83F200C402E9 /* PlayHubMainApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayHubMainApp.swift; sourceTree = "<group>"; };
+		743E3DCB2FFB83F200C402E9 /* StatsTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
+		743E3DCC2FFB83F200C402E9 /* HomeTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
+		743E3DCD2FFB83F200C402E9 /* SettingsTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		743E3DCE2FFB83F200C402E9 /* MapTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTab.swift; sourceTree = "<group>"; };
+		743E3DD02FFB83F200C402E9 /* ScoreBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBadge.swift; sourceTree = "<group>"; };
+		743E3DD12FFB83F200C402E9 /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		743E3DD32FFB83F200C402E9 /* QuizRushView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizRushView.swift; sourceTree = "<group>"; };
+		743E3DD42FFB83F200C402E9 /* TapFrenzyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapFrenzyView.swift; sourceTree = "<group>"; };
+		743E3DD52FFB83F200C402E9 /* LightItUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightItUpView.swift; sourceTree = "<group>"; };
+		743FDBC02FF78BCF00AD355A /* TriviaQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriviaQuestion.swift; sourceTree = "<group>"; };
 		7484A3712FDC429C00F044A7 /* TapFrenzy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapFrenzy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyApp.swift; sourceTree = "<group>"; };
-		7484A3762FDC429C00F044A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7484A3782FDC429F00F044A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7484A37B2FDC429F00F044A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7484A3812FDC429F00F044A7 /* TapFrenzyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapFrenzyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,11 +82,6 @@
 		7484A38B2FDC429F00F044A7 /* TapFrenzyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapFrenzyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7484A38F2FDC429F00F044A7 /* TapFrenzyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyUITests.swift; sourceTree = "<group>"; };
 		7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFrenzyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7484A39E2FDC432700F044A7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		7484A3A02FDC433F00F044A7 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
-		749D8ED82FEEB6FB00953B38 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightItUpGameView.swift; sourceTree = "<group>"; };
-		749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightItUpGameOverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +109,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		743E3DC52FFB83E700C402E9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DC62FFB83E700C402E9 /* PlayHubApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		743E3DC82FFB83F200C402E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DC92FFB83F200C402E9 /* Tabs */,
+				743E3DCF2FFB83F200C402E9 /* Shared */,
+				743E3DD22FFB83F200C402E9 /* Games */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		743E3DC92FFB83F200C402E9 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DCA2FFB83F200C402E9 /* PlayHubMainApp.swift */,
+				743E3DCB2FFB83F200C402E9 /* StatsTab.swift */,
+				743E3DCC2FFB83F200C402E9 /* HomeTab.swift */,
+				743E3DCD2FFB83F200C402E9 /* SettingsTab.swift */,
+				743E3DCE2FFB83F200C402E9 /* MapTab.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		743E3DCF2FFB83F200C402E9 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DD02FFB83F200C402E9 /* ScoreBadge.swift */,
+				743E3DD12FFB83F200C402E9 /* ResultView.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		743E3DD22FFB83F200C402E9 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DD32FFB83F200C402E9 /* QuizRushView.swift */,
+				743E3DD42FFB83F200C402E9 /* TapFrenzyView.swift */,
+				743E3DD52FFB83F200C402E9 /* LightItUpView.swift */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		743FDBBD2FF78BCF00AD355A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DB72FFB833600C402E9 /* LocationService.swift */,
+				743E3DB82FFB833600C402E9 /* NotificationService.swift */,
+				743E3DB92FFB833600C402E9 /* TriviaAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		743FDBBF2FF78BCF00AD355A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DB42FFB830D00C402E9 /* GameMode.swift */,
+				743E3DB32FFB830D00C402E9 /* GameSession.swift */,
+				743FDBC02FF78BCF00AD355A /* TriviaQuestion.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		743FDBC12FF78BCF00AD355A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				743E3DC02FFB835800C402E9 /* LightItUpVM.swift */,
+				743E3DBF2FFB835800C402E9 /* QuizRushVM.swift */,
+				743E3DBE2FFB835800C402E9 /* StatsVM.swift */,
+				743E3DBD2FFB835800C402E9 /* TapFrenzyVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		7484A3682FDC429C00F044A7 = {
 			isa = PBXGroup;
 			children = (
@@ -104,9 +212,11 @@
 		7484A3732FDC429C00F044A7 /* TapFrenzy */ = {
 			isa = PBXGroup;
 			children = (
-				749D8ED52FEEB54900953B38 /* Views */,
-				7484A3742FDC429C00F044A7 /* TapFrenzyApp.swift */,
-				7484A3762FDC429C00F044A7 /* ContentView.swift */,
+				743E3DC82FFB83F200C402E9 /* Views */,
+				743E3DC52FFB83E700C402E9 /* App */,
+				743FDBBF2FF78BCF00AD355A /* Models */,
+				743FDBBD2FF78BCF00AD355A /* Services */,
+				743FDBC12FF78BCF00AD355A /* ViewModels */,
 				7484A3782FDC429F00F044A7 /* Assets.xcassets */,
 				7484A37A2FDC429F00F044A7 /* Preview Content */,
 			);
@@ -136,42 +246,6 @@
 				7484A3912FDC429F00F044A7 /* TapFrenzyUITestsLaunchTests.swift */,
 			);
 			path = TapFrenzyUITests;
-			sourceTree = "<group>";
-		};
-		749D8ED52FEEB54900953B38 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				749D8EDA2FEEBC6200953B38 /* LightItUpMode */,
-				749D8ED72FEEB63E00953B38 /* TapFrenzyMode */,
-				749D8ED62FEEB59B00953B38 /* Home */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		749D8ED62FEEB59B00953B38 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				749D8ED82FEEB6FB00953B38 /* HomeView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		749D8ED72FEEB63E00953B38 /* TapFrenzyMode */ = {
-			isa = PBXGroup;
-			children = (
-				7484A39E2FDC432700F044A7 /* GameView.swift */,
-				7484A3A02FDC433F00F044A7 /* GameOverView.swift */,
-			);
-			path = TapFrenzyMode;
-			sourceTree = "<group>";
-		};
-		749D8EDA2FEEBC6200953B38 /* LightItUpMode */ = {
-			isa = PBXGroup;
-			children = (
-				749D8EDB2FEEBCAF00953B38 /* LightItUpGameView.swift */,
-				749D8EDD2FEEBCDE00953B38 /* LightItUpGameOverView.swift */,
-			);
-			path = LightItUpMode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,13 +378,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7484A3772FDC429C00F044A7 /* ContentView.swift in Sources */,
-				7484A39F2FDC432700F044A7 /* GameView.swift in Sources */,
-				7484A3A12FDC433F00F044A7 /* GameOverView.swift in Sources */,
-				749D8ED92FEEB6FB00953B38 /* HomeView.swift in Sources */,
-				7484A3752FDC429C00F044A7 /* TapFrenzyApp.swift in Sources */,
-				749D8EDE2FEEBCDE00953B38 /* LightItUpGameOverView.swift in Sources */,
-				749D8EDC2FEEBCAF00953B38 /* LightItUpGameView.swift in Sources */,
+				743E3DC12FFB835800C402E9 /* TapFrenzyVM.swift in Sources */,
+				743E3DB52FFB830D00C402E9 /* GameSession.swift in Sources */,
+				743E3DC22FFB835800C402E9 /* StatsVM.swift in Sources */,
+				743FDBC42FF78BCF00AD355A /* TriviaQuestion.swift in Sources */,
+				743E3DDE2FFB83F200C402E9 /* TapFrenzyView.swift in Sources */,
+				743E3DBA2FFB833600C402E9 /* LocationService.swift in Sources */,
+				743E3DDB2FFB83F200C402E9 /* ScoreBadge.swift in Sources */,
+				743E3DDD2FFB83F200C402E9 /* QuizRushView.swift in Sources */,
+				743E3DD72FFB83F200C402E9 /* StatsTab.swift in Sources */,
+				743E3DBC2FFB833600C402E9 /* TriviaAPI.swift in Sources */,
+				743E3DC32FFB835800C402E9 /* QuizRushVM.swift in Sources */,
+				743E3DBB2FFB833600C402E9 /* NotificationService.swift in Sources */,
+				743E3DB62FFB830D00C402E9 /* GameMode.swift in Sources */,
+				743E3DDC2FFB83F200C402E9 /* ResultView.swift in Sources */,
+				743E3DC72FFB83E700C402E9 /* PlayHubApp.swift in Sources */,
+				743E3DDF2FFB83F200C402E9 /* LightItUpView.swift in Sources */,
+				743E3DD62FFB83F200C402E9 /* PlayHubMainApp.swift in Sources */,
+				743E3DDA2FFB83F200C402E9 /* MapTab.swift in Sources */,
+				743E3DD92FFB83F200C402E9 /* SettingsTab.swift in Sources */,
+				743E3DD82FFB83F200C402E9 /* HomeTab.swift in Sources */,
+				743E3DC42FFB835800C402E9 /* LightItUpVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +559,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TapFrenzy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to geotag game scores and show them on the Map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -499,6 +588,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TapFrenzy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to geotag game scores and show them on the Map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

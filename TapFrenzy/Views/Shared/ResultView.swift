@@ -1,12 +1,23 @@
 import SwiftUI
 
-struct GameOverView: View {
-    @Binding var score: Int
-    @Binding var timeRemaining: Int
-    @Binding var isGameActive: Bool
-    @Binding var hasGameStarted: Bool // Binding to control transition back to home screen
-    @Binding var highScore: Int
-    var onHome: () -> Void // Added for Return Home functionality
+struct ResultView: View {
+    let score: Int
+    let highScore: Int
+    let mode: AppGameMode
+    let onReset: () -> Void
+    let onHome: () -> Void
+    
+    var modeTitle: String {
+        switch mode {
+        case .frenzySpeed: return "Tap Frenzy"
+        case .gridMatch: return "Light It Up"
+        case .triviaQuiz: return "Quiz Rush"
+        }
+    }
+    
+    var shareMessage: String {
+        return "I just scored \(score) on \(modeTitle) — beat that!"
+    }
     
     var body: some View {
         VStack(spacing: 25) {
@@ -17,11 +28,10 @@ struct GameOverView: View {
             .font(.largeTitle)
             .fontWeight(.black)
             .foregroundColor(.red)
-            .padding(.top, 50)
+            .padding(.top, 40)
             
             Spacer()
             
-            // Performance Results Section
             VStack(spacing: 15) {
                 Text("Your Final Score")
                     .font(.title2)
@@ -31,7 +41,6 @@ struct GameOverView: View {
                     .font(.system(size: 90, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
                 
-                // Crown High Score Indicator Display
                 HStack {
                     Image(systemName: "crown.fill")
                         .foregroundColor(.yellow)
@@ -55,51 +64,54 @@ struct GameOverView: View {
             
             Spacer()
             
-            // Control Action Section: Return to Start Menu Option
+            ShareLink(item: shareMessage) {
+                HStack {
+                    Image(systemName: "square.and.arrow.up.fill")
+                    Text("Share Your Score")
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .cornerRadius(15)
+                .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
+            }
+            .padding(.horizontal, 40)
+            
             VStack(spacing: 15) {
-                Button(action: {
-                    // Reset states and take user back to the Start Menu
-                    withAnimation {
-                        score = 0
-                        timeRemaining = 10
-                        isGameActive = true
-                        hasGameStarted = false
-                    }
-                }) {
+                Button(action: onReset) {
                     HStack {
                         Image(systemName: "arrow.clockwise")
                         Text("Play Again")
                     }
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(Color.green)
                     .cornerRadius(15)
-                    .shadow(radius: 5)
+                    .shadow(color: .green.opacity(0.2), radius: 5)
                 }
                 
-                Button(action: {
-                    withAnimation {
-                        onHome()
-                    }
-                }) {
+                Button(action: onHome) {
                     HStack {
                         Image(systemName: "house.fill")
                         Text("Return Home")
                     }
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue.opacity(0.1))
+                    .background(Color(.systemGray5))
                     .cornerRadius(15)
                 }
             }
             .padding(.horizontal, 40)
-            .padding(.bottom, 60)
+            .padding(.bottom, 40)
         }
+        .background(Color(.systemGray6).edgesIgnoringSafeArea(.all))
     }
 }
