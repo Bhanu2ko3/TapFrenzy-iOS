@@ -17,23 +17,60 @@ struct MapTab: View {
     
     var body: some View {
         NavigationStack {
-            Map(coordinateRegion: $region, annotationItems: annotations) { item in
-                MapAnnotation(coordinate: item.coordinate) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "mappin.circle.fill")
-                            .font(.title)
-                            .foregroundColor(item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo))
-                        
-                        Text("\(item.score)")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color(.systemBackground))
-                            .cornerRadius(8)
-                            .shadow(radius: 2)
+            VStack(spacing: 0) {
+                Map(coordinateRegion: $region, annotationItems: annotations) { item in
+                    MapAnnotation(coordinate: item.coordinate) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.title)
+                                .foregroundColor(item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo))
+                            
+                            Text("\(item.score)")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color(.systemBackground))
+                                .cornerRadius(8)
+                                .shadow(radius: 2)
+                        }
                     }
                 }
+                .frame(height: 300)
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Recorded Locations")
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .padding(.top)
+                    
+                    if annotations.isEmpty {
+                        Text("No geotagged games played yet.")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    } else {
+                        List(annotations) { item in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(item.mode == .frenzySpeed ? "Tap Frenzy" : (item.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                    Text(String(format: "Lat: %.4f, Lon: %.4f", item.coordinate.latitude, item.coordinate.longitude))
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                                Spacer()
+                                Text("\(item.score) pts")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                        }
+                        .listStyle(PlainListStyle())
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .navigationTitle("Geotags")
             .onAppear {
