@@ -9,28 +9,15 @@ struct IdentifiableLocation: Identifiable {
 }
 
 struct MapTab: View {
-    @State private var items: [HubGameSession] = []
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612),
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
-    
-    var annotations: [IdentifiableLocation] {
-        items.map { session in
-            let lat = (session.locLatitude == 0.0) ? 6.9271 + Double(session.finalScore % 10) * 0.002 : session.locLatitude
-            let lon = (session.locLongitude == 0.0) ? 79.8612 + Double(session.finalScore % 10) * 0.002 : session.locLongitude
-            return IdentifiableLocation(
-                id: session.id,
-                coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-                score: session.finalScore,
-                mode: session.mode
-            )
-        }
-    }
+    @State private var annotations: [IdentifiableLocation] = []
     
     var body: some View {
         NavigationStack {
-            Map(coordinateRegion: .constant(region), annotationItems: annotations) { item in
+            Map(coordinateRegion: $region, annotationItems: annotations) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     VStack(spacing: 4) {
                         Image(systemName: "mappin.circle.fill")
@@ -51,7 +38,18 @@ struct MapTab: View {
             .navigationTitle("Geotags")
             .onAppear {
                 let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
-                items = [HubGameSession].deserialize(from: rawLedger)
+                let items = [HubGameSession].deserialize(from: rawLedger)
+                
+                self.annotations = items.map { session in
+                    let lat = (session.locLatitude == 0.0) ? 6.9271 + Double(session.finalScore % 10) * 0.002 : session.locLatitude
+                    let lon = (session.locLongitude == 0.0) ? 79.8612 + Double(session.finalScore % 10) * 0.002 : session.locLongitude
+                    return IdentifiableLocation(
+                        id: session.id,
+                        coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+                        score: session.finalScore,
+                        mode: session.mode
+                    )
+                }
             }
         }
     }
