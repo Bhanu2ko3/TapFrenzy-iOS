@@ -23,7 +23,7 @@ struct MapTab: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Map(coordinateRegion: .constant(region), annotationItems: annotations) { item in
+                Map(coordinateRegion: $region, annotationItems: annotations) { item in
                     MapMarker(
                         coordinate: item.coordinate,
                         tint: item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo)
@@ -59,6 +59,15 @@ struct MapTab: View {
                                     Text("\(item.score) pts")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    withAnimation {
+                                        region = MKCoordinateRegion(
+                                            center: item.coordinate,
+                                            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+                                        )
+                                    }
                                 }
                             }
                             
@@ -96,6 +105,15 @@ struct MapTab: View {
                         score: session.score,
                         mode: session.mode
                     )
+                }
+                
+                if let lastAnnotation = self.annotations.last {
+                    withAnimation {
+                        region = MKCoordinateRegion(
+                            center: lastAnnotation.coordinate,
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                        )
+                    }
                 }
             }
         }
