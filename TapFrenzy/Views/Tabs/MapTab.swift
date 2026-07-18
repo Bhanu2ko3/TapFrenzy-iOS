@@ -23,11 +23,38 @@ struct MapTab: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Map(coordinateRegion: $region, annotationItems: annotations) { item in
-                    MapMarker(
-                        coordinate: item.coordinate,
-                        tint: item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo)
-                    )
+                ZStack(alignment: .bottomTrailing) {
+                    Map(coordinateRegion: $region, annotationItems: annotations) { item in
+                        MapMarker(
+                            coordinate: item.coordinate,
+                            tint: item.mode == .frenzySpeed ? .blue : (item.mode == .gridMatch ? .purple : .indigo)
+                        )
+                    }
+                    
+                    Button(action: {
+                        withAnimation {
+                            if let lastAnnotation = annotations.last {
+                                region = MKCoordinateRegion(
+                                    center: lastAnnotation.coordinate,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                                )
+                            } else {
+                                region = MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612),
+                                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                                )
+                            }
+                        }
+                    }) {
+                        Image(systemName: "location.fill")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.blue)
+                            .padding(10)
+                            .background(Color(.systemBackground))
+                            .clipShape(Circle())
+                            .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
+                    }
+                    .padding(12)
                 }
                 .frame(height: 300)
                 
