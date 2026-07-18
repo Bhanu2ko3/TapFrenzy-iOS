@@ -9,22 +9,22 @@ struct LightItUpView: View {
         Array(repeating: GridItem(.flexible(), spacing: 15), count: 3)
     }
     
-    var topScores: [HubGameSession] {
+    var topScores: [GameSession] {
         let rawLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
-        let allSessions = [HubGameSession].deserialize(from: rawLedger)
+        let allSessions = [GameSession].deserialize(from: rawLedger)
         let modeSessions = allSessions.filter { $0.mode == .gridMatch }
         
-        var uniqueBests: [String: HubGameSession] = [:]
+        var uniqueBests: [String: GameSession] = [:]
         for session in modeSessions {
             if let existing = uniqueBests[session.playerName] {
-                if session.finalScore > existing.finalScore {
+                if session.score > existing.score {
                     uniqueBests[session.playerName] = session
                 }
             } else {
                 uniqueBests[session.playerName] = session
             }
         }
-        return Array(uniqueBests.values.sorted(by: { $0.finalScore > $1.finalScore }).prefix(3))
+        return Array(uniqueBests.values.sorted(by: { $0.score > $1.score }).prefix(3))
     }
     
     var body: some View {
@@ -72,7 +72,7 @@ struct LightItUpView: View {
                                       Text(result.playerName)
                                           .fontWeight(.semibold)
                                       Spacer()
-                                      Text("\(result.finalScore)")
+                                      Text("\(result.score)")
                                           .fontWeight(.bold)
                                           .foregroundColor(.purple)
                                   }

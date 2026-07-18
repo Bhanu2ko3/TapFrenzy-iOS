@@ -3,9 +3,17 @@ import SwiftUI
 struct SettingsTab: View {
     @AppStorage("dailyNotificationsEnabled") private var notificationsEnabled = false
     @AppStorage("appTheme") private var appTheme = 0
-    @State private var targetTime = Date()
+    @AppStorage("reminderTimeInterval") private var reminderTimeInterval: Double = Date().timeIntervalSinceReferenceDate
+    
     @State private var showingResetConfirmation = false
     @StateObject private var statsViewModel = StatsVM()
+    
+    private var targetTimeBinding: Binding<Date> {
+        Binding(
+            get: { Date(timeIntervalSinceReferenceDate: reminderTimeInterval) },
+            set: { reminderTimeInterval = $0.timeIntervalSinceReferenceDate }
+        )
+    }
     
     var body: some View {
         NavigationStack {
@@ -15,15 +23,17 @@ struct SettingsTab: View {
                         .onChange(of: notificationsEnabled) { newValue in
                             if newValue {
                                 NotificationService.requestAuthorization()
-                                NotificationService.scheduleDailyChallenge(at: targetTime)
+                                let savedTime = Date(timeIntervalSinceReferenceDate: reminderTimeInterval)
+                                NotificationService.scheduleDailyChallenge(at: savedTime)
                             } else {
                                 NotificationService.cancelAllNotifications()
                             }
                         }
                     
                     if notificationsEnabled {
-                        DatePicker("Reminder Time", selection: $targetTime, displayedComponents: .hourAndMinute)
-                            .onChange(of: targetTime) { newTime in
+                        DatePicker("Reminder Time", selection: targetTimeBinding, displayedComponents: .hourAndMinute)
+                            .onChange(of: reminderTimeInterval) { newInterval in
+                                let newTime = Date(timeIntervalSinceReferenceDate: newInterval)
                                 NotificationService.scheduleDailyChallenge(at: newTime)
                             }
                     }

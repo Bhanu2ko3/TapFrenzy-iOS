@@ -5,11 +5,12 @@ struct ChartData: Identifiable {
     let id: UUID
     let label: String
     let score: Int
-    let mode: AppGameMode
+    let mode: GameMode
 }
 
 struct StatsTab: View {
     @StateObject private var viewModel = StatsVM()
+    @State private var visibleLimit: Int = 10
     
     var chartData: [ChartData] {
         let formatter = DateFormatter()
@@ -19,8 +20,8 @@ struct StatsTab: View {
         return recent.enumerated().map { index, session in
             ChartData(
                 id: session.id,
-                label: "#\(recent.count - index) (\(formatter.string(from: session.playedAt)))",
-                score: session.finalScore,
+                label: "#\(recent.count - index) (\(formatter.string(from: session.timestamp)))",
+                score: session.score,
                 mode: session.mode
             )
         }
@@ -106,7 +107,7 @@ struct StatsTab: View {
                         
                         HubActionCard(title: "Recent Games", iconName: "clock.fill", highlightColor: .orange) {
                             VStack(spacing: 12) {
-                                ForEach(viewModel.gameHistory) { session in
+                                ForEach(Array(viewModel.gameHistory.prefix(visibleLimit))) { session in
                                     HStack {
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(session.mode == .frenzySpeed ? "Tap Frenzy" : (session.mode == .gridMatch ? "Light It Up" : "Quiz Rush"))
@@ -119,18 +120,33 @@ struct StatsTab: View {
                                                 Text("•")
                                                     .font(.caption)
                                                     .foregroundColor(.secondary)
-                                                Text(session.playedAt, style: .date)
+                                                Text(session.timestamp, style: .date)
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
                                             }
                                         }
                                         Spacer()
-                                        Text("\(session.finalScore) pts")
+                                        Text("\(session.score) pts")
                                             .font(.headline)
                                             .foregroundColor(session.mode == .frenzySpeed ? .blue : (session.mode == .gridMatch ? .purple : .indigo))
                                     }
-                                    if session.id != viewModel.gameHistory.last?.id {
+                                    if session.id != viewModel.gameHistory.prefix(visibleLimit).last?.id {
                                         Divider()
+                                    }
+                                }
+                                
+                                if viewModel.gameHistory.count > visibleLimit {
+                                    Button(action: {
+                                        withAnimation {
+                                            visibleLimit += 10
+                                        }
+                                    }) {
+                                        Text("Load More")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.blue)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                            .padding(.vertical, 8)
                                     }
                                 }
                             }

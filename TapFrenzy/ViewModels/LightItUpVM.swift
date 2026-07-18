@@ -141,24 +141,24 @@ class LightItUpVM: ObservableObject {
     
     func saveSessionWithLocation(latitude: Double, longitude: Double) {
         let existingLedger = UserDefaults.standard.string(forKey: "hub_ledger") ?? "[]"
-        var list = [HubGameSession].deserialize(from: existingLedger)
+        var list = [GameSession].deserialize(from: existingLedger)
         let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
         let finalLat = (latitude == 0.0) ? 6.9271 + Double.random(in: -0.005...0.005) : latitude
         let finalLon = (longitude == 0.0) ? 79.8612 + Double.random(in: -0.005...0.005) : longitude
         
-        let session = HubGameSession(
+        let session = GameSession(
             id: UUID(),
             playerName: playerName,
             mode: .gridMatch,
-            finalScore: score,
-            playedAt: Date(),
-            locLatitude: finalLat,
-            locLongitude: finalLon
+            score: score,
+            timestamp: Date(),
+            latitude: finalLat,
+            longitude: finalLon
         )
         
         list.append(session)
-        UserDefaults.standard.set([HubGameSession].serialize(list), forKey: "hub_ledger")
+        UserDefaults.standard.set([GameSession].serialize(list), forKey: "hub_ledger")
         
         let currentBest = UserDefaults.standard.integer(forKey: "highScore_lightItUp")
         if score > currentBest {
