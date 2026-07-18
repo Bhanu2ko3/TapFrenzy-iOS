@@ -144,8 +144,9 @@ class LightItUpVM: ObservableObject {
         var list = [GameSession].deserialize(from: existingLedger)
         let playerName = UserDefaults.standard.string(forKey: "currentPlayerName") ?? "Anonymous"
         
-        let finalLat = (latitude == 0.0) ? 6.9271 + Double.random(in: -0.005...0.005) : latitude
-        let finalLon = (longitude == 0.0) ? 79.8612 + Double.random(in: -0.005...0.005) : longitude
+        let isDefaultSimulatorLoc = abs(latitude - 37.7858) < 0.001 && abs(longitude - -122.4064) < 0.001
+        let finalLat = (latitude == 0.0 || isDefaultSimulatorLoc) ? 6.9271 + Double.random(in: -0.005...0.005) : latitude
+        let finalLon = (longitude == 0.0 || isDefaultSimulatorLoc) ? 79.8612 + Double.random(in: -0.005...0.005) : longitude
         
         let session = GameSession(
             id: UUID(),
